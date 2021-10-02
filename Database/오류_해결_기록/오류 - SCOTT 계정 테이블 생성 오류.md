@@ -6,7 +6,7 @@ DESC EMP;
 
 ```
 
-![](/Study/image/버그_SCOTT_테이블생성오류_1.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_1.png)
 
 ???
 
@@ -18,7 +18,7 @@ SELECT * FROM EMP;
 
 ```
 
-![](/Study/image/버그_SCOTT_테이블생성오류_2.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_2.png)
 
 아무것도 안나온다. (~~사실 이 부분은 버그를 다 수정하고 메모장으로 편집한거다. 어쨋든 고치기 전에는 안나왔으니..~~)
 
@@ -26,7 +26,7 @@ SELECT * FROM EMP;
 
 그래서 블로그에 올려진 demobld.sql파일의 SQL문을 하나씩 입력해보기로 했다.
 
-![](/Study/image/버그_SCOTT_테이블생성오류_3.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_3.png)
 
 USERS에 대한 권한이 없다는 에러메세지가 나온다.
 
@@ -42,25 +42,25 @@ alter user scott default tablespace users quota unlimited on users;
 
 그리고 INSERT를 입력하니 데이터가 잘 들어갔다.
 
-![](/Study/image/버그_SCOTT_테이블생성오류_4.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_4.png)
 
 그래도 테이블을 확인을 해보면 PK부분이 빠져있었다.
 
-![](/Study/image/버그_SCOTT_테이블생성오류_1.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_1.png)
 
 그래서 블로그[2]의 SQL문을 다시 확인해봤다. 
 
-![](/Study/image/버그_SCOTT_테이블생성오류_5.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_5.png)
 
 테이블을 만들때 애초에 PK를 설정하지 않는구나..
 
 내가 가진 scott.sql 파일을 열어봤다.
 
-![](/Study/image/버그_SCOTT_테이블생성오류_6.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_6.png)
 
 REM 부분은 제외하고 scott.sql 파일에 있는 sql문을 한줄씩 입력했다.
 
-![](/Study/image/버그_SCOTT_테이블생성오류_7.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_7.png)
 
 이 부분에서 `CONNECT SCOTT/TIGER` 부분이 나와서 SQL PLUS를 하나 더 열어서 나머지 부분을 진행했다. 결과는 성공 !
 
@@ -70,7 +70,7 @@ DESC EMP;
 
 ```
 
-![](/Study/image/버그_SCOTT_테이블생성오류_8.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_8.png)
 
 ```sql
 
@@ -79,7 +79,7 @@ FROM EMP;
 
 ```
 
-![](/Study/image/버그_SCOTT_테이블생성오류_9.png)
+![](/bin/image/버그_SCOTT_테이블생성오류_9.png)
 
 # 2. 오류 해결 SQL 파일
 
