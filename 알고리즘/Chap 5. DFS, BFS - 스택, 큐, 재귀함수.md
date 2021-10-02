@@ -14,7 +14,7 @@
 
 ### B. [큐 (Queue)](/알고리즘/bin/큐(Queue).md)
 
-### C. [재귀함수 (Recursive Function)](/알고리즘/bin/재귀함수(Recursive Function).md)
+### C. [재귀함수 (Recursive Function)](/알고리즘/bin/재귀함수(RecursiveFunction).md)
 
 
 # 참고문헌

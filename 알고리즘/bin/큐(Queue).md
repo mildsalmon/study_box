@@ -2,7 +2,7 @@
 
 선입선출 (FIFO)
 
-!db_imagequeue.png]]
+![que](/bin/PS_image/queue.png)
 
 입구와 출구가 모두 뚫려 있는 터널과 같은 형태로 시각화
 

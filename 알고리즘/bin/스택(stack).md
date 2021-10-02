@@ -4,7 +4,7 @@
 
 입구와 출구가 동일한 형태로 시각화할 수 있다.
 
-![[stack.png]]
+![stack](bin/PS_image/stack.png)
 
 ```python
 
