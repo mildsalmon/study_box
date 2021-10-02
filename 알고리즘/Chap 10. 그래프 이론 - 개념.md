@@ -32,11 +32,11 @@ E = 간선의 개수
 
 어떤 문제를 만나든 메모리와 시간을 염두에 두고 알고리즘을 선택해서 구현해야 한다. 노드의 개수가 적은 경우에는 플로이드 워셜 알고리즘을 이용할 수 있다. 노드와 간선의 개수가 모두 많으면 우선순위 큐를 이용하는 다익스트라 알고리즘을 이용하면 유리하다.
 
-# 2. [서로소 집합 (Disjoint Sets)](/알고리즘/bin/서로소집합(Disjoint Sets).md)
+# 2. [서로소 집합 (Disjoint Sets)](/알고리즘/bin/서로소집합(DisjointSets).md)
 
-# 3. [신장 트리 (Spanning Tree)](/알고리즘/bin/신장트리(Spanning Tree).md)
+# 3. [신장 트리 (Spanning Tree)](/알고리즘/bin/신장트리(SpanningTree).md)
 
-# 4. [위상 정렬 (Topology Sort)](/알고리즘/bin/위상정렬(Topology Sort).md)
+# 4. [위상 정렬 (Topology Sort)](/알고리즘/bin/위상정렬(TopologySort).md)
 
 # 참고문헌
 
