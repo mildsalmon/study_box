@@ -2,12 +2,11 @@
 
 ### Chapter 1. 오라클 DBMS 실습환경 구축
 
-[[Chapter 1. 오라클 DBMS 실습환경 구축]]
+[Study/Chapter 1. 오라클 DBMS 실습환경 구축.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%201/Chapter%201.%20%EC%98%A4%EB%9D%BC%ED%81%B4%20DBMS%20%EC%8B%A4%EC%8A%B5%ED%99%98%EA%B2%BD%20%EA%B5%AC%EC%B6%95.md)
 
 ### Chapter 2. 실습 데이터 구성 
 
-[[Chapter 2. 실습 데이터 구성]]
-
+[Study/Chapter 2. 실습 데이터 구성.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%201/Chapter%202.%20%EC%8B%A4%EC%8A%B5%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B5%AC%EC%84%B1.md)
 
 # Part 2. 데이터 모델링의 이해
 
