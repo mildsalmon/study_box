@@ -10,23 +10,27 @@
 
 # Part 2. 데이터 모델링의 이해
 
- 
-
 ### Chapter 3. 데이터 모델링의 이해 
 
 ##### 3.1 데이터 모델의 이해 
 
+[Study/Chapter 3-1. 데이터 모델의 이해.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%203-1.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%9D%B4%ED%95%B4.md)
+
 ##### 3.2 엔터티 
+
+[Study/Chapter 3-2. 엔터티.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%203-2.%20%EC%97%94%ED%84%B0%ED%8B%B0.md)
 
 ##### 3.3 속성 
 
+[Study/Chapter 3-3. 속성.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%203-3.%20%EC%86%8D%EC%84%B1.md)
+
 ##### 3.4 관계 
+
+[Study/Chapter 3-4. 관계.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%203-4.%20%EA%B4%80%EA%B3%84.md)
 
 ##### 3.5 식별자 
 
-##### 3.6 연습문제 
-
-##### 3.7 연습문제 해설
+[Study/Chapter 3-5. 식별자.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%203-5.%20%EC%8B%9D%EB%B3%84%EC%9E%90.md)
 
  
 
