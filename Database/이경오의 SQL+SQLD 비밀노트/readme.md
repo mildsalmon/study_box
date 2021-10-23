@@ -38,23 +38,29 @@
 
 ##### 4.1 성능 데이터 모델링의 개요 
 
+[Study/Chapter 4-1. 성능 데이터 모델링의 개요.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%204-1.%20%EC%84%B1%EB%8A%A5%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%AA%A8%EB%8D%B8%EB%A7%81%EC%9D%98%20%EA%B0%9C%EC%9A%94.md)
+
+
 ##### 4.2 정규화와 성능 
+
+[Study/Chapter 4-2. 정규화와 성능.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%204-2.%20%EC%A0%95%EA%B7%9C%ED%99%94%EC%99%80%20%EC%84%B1%EB%8A%A5.md)
 
 ##### 4.3 반정규화와 성능 
 
+[Study/Chapter 4-3. 반정규화와 성능.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%204-3.%20%EB%B0%98%EC%A0%95%EA%B7%9C%ED%99%94%EC%99%80%20%EC%84%B1%EB%8A%A5.md)
+
 ##### 4.4 대량 데이터에 따른 성능 
+
+[Study/Chapter 4-4. 대량 데이터에 따른 성능.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%204-4.%20%EB%8C%80%EB%9F%89%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EC%84%B1%EB%8A%A5.md)
 
 ##### 4.5 데이터베이스 구조와 성능 
 
+[Study/Chapter 4-5. 데이터베이스 구조와 성능.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%204-5.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%84%B1%EB%8A%A5.md)
+
 ##### 4.6 분산 데이터베이스와 성능 
 
-##### 4.7 연습문제 
+[Study/Chapter 4-6. 분산 데이터베이스와 성능.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Database/%EC%9D%B4%EA%B2%BD%EC%98%A4%EC%9D%98%20SQL%2BSQLD%20%EB%B9%84%EB%B0%80%EB%85%B8%ED%8A%B8/Part%202/Chapter%204-6.%20%EB%B6%84%EC%82%B0%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%99%80%20%EC%84%B1%EB%8A%A5.md)
 
-##### 4.8 연습문제 해설 
-
- 
-
- 
 
 # Part 3. SQL 기본 및 활용
 
