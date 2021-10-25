@@ -1,0 +1,9 @@
+x.x.x.x - - [01/Jul/1995:00:00:01 -0400] "GET /history/apollo..." 200 6245
+x.x.x.x - - [01/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+x.x.x.x - - [02/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+x.x.x.x - - [02/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+x.x.x.x - - [03/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+x.x.x.x - - [03/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+x.x.x.x - - [04/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+x.x.x.x - - [05/Jul/1995:00:00:06 -0400] "GET /shuttle/coutd..." 200 3985
+

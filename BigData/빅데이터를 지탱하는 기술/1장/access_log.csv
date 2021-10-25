@@ -1,0 +1,9 @@
+time,request,status,bytes
+1995-07-01 00:00:01,GET /history/apollo...,200,6245
+1995-07-01 00:00:06,GET /shuttle/coutd...,200,3985
+1995-07-02 00:00:06,GET /shuttle/coutd...,200,3985
+1995-07-02 00:00:06,GET /shuttle/coutd...,200,3985
+1995-07-03 00:00:06,GET /shuttle/coutd...,200,3985
+1995-07-03 00:00:06,GET /shuttle/coutd...,200,3985
+1995-07-04 00:00:06,GET /shuttle/coutd...,200,3985
+1995-07-05 00:00:06,GET /shuttle/coutd...,200,3985
