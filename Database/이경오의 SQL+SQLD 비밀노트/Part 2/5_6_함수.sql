@@ -1,0 +1,101 @@
+SELECT
+      LOWER('SQL Developer')
+    , UPPER('SQL Developer')
+    , ASCII('A')
+    , CHR('65')
+    , CONCAT('SQL', 'Developer')
+    , SUBSTR('SQL Developer', 1, 3)
+    , LENGTH('SQL')
+    , LTRIM(' SQL')
+    , RTRIM('SQL ')
+FROM DUAL;    
+
+SELECT
+      ABS(-15)
+    , SIGN(1)
+    , MOD(8, 3)
+    , CEIL(38.1)
+    , FLOOR(38.9)
+    , ROUND(38.678, 2)
+    , ROUND(38.678, 1)
+    , ROUND(38.678, 0)
+    , ROUND(38.678, -1)
+    , TRUNC(38.678)
+    , TRUNC(38.678, 1)
+    , TRUNC(38.678, 2)
+FROM DUAL;
+
+SELECT
+      SYSDATE
+    , EXTRACT(YEAR FROM SYSDATE)
+    , EXTRACT(MONTH FROM SYSDATE)
+    , EXTRACT(DAY FROM SYSDATE)
+    , TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY'))
+    , TO_NUMBER(TO_CHAR(SYSDATE, 'MM'))
+    , TO_NUMBER(TO_CHAR(SYSDATE, 'DD'))
+    , TO_NUMBER(TO_CHAR(SYSDATE, 'HH24'))
+    , TO_NUMBER(TO_CHAR(SYSDATE, 'MI'))
+    , TO_NUMBER(TO_CHAR(SYSDATE, 'SS'))
+    , TO_CHAR(SYSDATE, 'YYYY')
+    , TO_CHAR(SYSDATE, 'MM')
+    , TO_CHAR(SYSDATE, 'DD')
+    , TO_CHAR(SYSDATE, 'HH24')
+    , TO_CHAR(SYSDATE, 'MI')
+    , TO_CHAR(SYSDATE, 'SS')
+FROM DUAL;
+
+SELECT
+      SYSDATE
+    , SYSDATE - 1
+    , SYSDATE - (1/24)
+    , SYSDATE - (1/24/60)
+    , SYSDATE - (1/24/60/60)
+    , SYSDATE - (1/24/60/60) * 10
+    , SYSDATE - (1/24/60/60) * 30
+FROM DUAL;
+
+SELECT
+      TO_CHAR(SYSDATE, 'YYYY/MM/DD')
+    , TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS')
+    , TO_CHAR(10.25, '$999,999,999.99')
+    , TO_CHAR(12500, 'L999,999,999,999')
+    , TO_NUMBER('100') + TO_NUMBER('100')
+    , TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD'), 'YYYYMMDD')
+FROM DUAL;
+
+SELECT
+    CASE
+        WHEN A.INDUTY_CL_SE_CD = 'ICS001' THEN '대'
+        WHEN A.INDUTY_CL_SE_CD = 'ICS002' THEN '중'
+        WHEN A.INDUTY_CL_SE_CD = 'ICS003' THEN '소'
+        ELSE ''
+    END AS "업종분류구분명"
+FROM TB_INDUTY_CL_SE A
+;
+
+SELECT
+    DECODE( A.INDUTY_CL_SE_CD,
+        'ICS001', '대',
+        'ICS002', '중',
+        'ICS003', '소',
+        '') AS "업종분류구분명"
+FROM TB_INDUTY_CL_SE A
+;
+
+SELECT A.INDUTY_CL_CD
+    , A.INDUTY_CL_NM
+    , A.INDUTY_CL_SE_CD
+    , NVL(UPPER_INDUTY_CL_CD, '최상위') AS "UPPER_INDUTY_CL_CD"
+FROM TB_INDUTY_CL A
+WHERE A.UPPER_INDUTY_CL_CD IS NULL
+;
+
+SELECT
+      NULLIF('SQLD', 'SQLP')
+    , NULLIF('SQLD', 'SQLD')
+    , NVL(NULLIF('SQLD', 'SQLD'), '같음')
+    , COALESCE(NULL, NULL, 'SQLD')
+    , COALESCE(NULL, 'SQLP', 'SQLD')
+    , COALESCE('SQL', 'SQLP', 'SQLD')
+FROM DUAL;    
+

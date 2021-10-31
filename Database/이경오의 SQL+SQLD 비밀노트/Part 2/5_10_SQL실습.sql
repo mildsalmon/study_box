@@ -1,0 +1,53 @@
+--코드 5-89 전국의 스타벅스 매장 조회
+SELECT A.CTPRVN_CD, A.CMPNM_NM, A.BHF_NM, A.LNM_ADRES
+  FROM TB_BSSH A
+ WHERE (    A.CMPNM_NM LIKE '%스타%벅스%'
+         OR UPPER(A.CMPNM_NM) LIKE '%STAR%BUCKS%'
+       )
+;
+
+--코드 5-90 전국의 시/도별 스타벅스 매장의 개수 구하기
+SELECT A.CTPRVN_CD
+     , B.ADRES_CL_NM
+     , COUNT(*) AS CNT
+  FROM TB_BSSH A
+     , TB_ADRES_CL B
+ WHERE (   A.CMPNM_NM LIKE '%스타%벅스%'
+        OR UPPER(A.CMPNM_NM) LIKE '%STAR%BUCKS%'
+       )
+   AND A.CTPRVN_CD= B.ADRES_CL_CD
+   AND B.ADRES_CL_SE_CD = 'ACS001' --시도 기준
+GROUP BY A.CTPRVN_CD, B.ADRES_CL_NM
+ORDER BY CNT DESC
+;
+
+SELECT A.SUBWAY_STATN_NO
+            , B.LN_NM
+            , B.STATN_NM
+            , C.TK_GFF_SE_NM
+            , A.BEGIN_TIME
+            , A.END_TIME
+            , A.TK_GFF_CNT
+FROM TB_SUBWAY_STATN_TK_GFF A
+        , TB_SUBWAY_STATN B
+        , TB_TK_GFF_SE C
+WHERE A.STD_YM = '202010'
+    AND A.BEGIN_TIME = '0800'
+    AND A.END_TIME = '0900'
+    AND A.TK_GFF_SE_CD =  'TGS002'
+    AND A.SUBWAY_STATN_NO = B.SUBWAY_STATN_NO
+    AND A.TK_GFF_SE_CD = C.TK_GFF_SE_CD
+ORDER BY A.TK_GFF_CNT DESC
+;
+
+SELECT A.AGRDE_SE_CD
+            , SUM(CASE WHEN A.POPLTN_SE_CD = 'M' THEN A.POPLTN_CNT
+                            ELSE 0
+                        END) MALE_POPLTN_CNT
+            , SUM(CASE WHEN A.POPLTN_SE_CD = 'F' THEN A.POPLTN_CNT
+                            ELSE 0
+                        END) FEMALE_POPLTN_CNT
+FROM TB_POPLTN A
+GROUP BY A.AGRDE_SE_CD
+ORDER BY A.AGRDE_SE_CD
+;
