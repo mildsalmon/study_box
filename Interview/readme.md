@@ -10,8 +10,10 @@
 
 ### A. 운영체제
 
-[[운영체제 (Operating System)]]
+[Study/운영체제 (Operating System).md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Operating%20System/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20(Operating%20System).md)
 
 # 3. Language
 
-[[기초]]
+[Study/기초.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Language/%EA%B8%B0%EC%B4%88.md)
+
+
