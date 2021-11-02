@@ -6,11 +6,35 @@
 
 [Study/선택 정렬(Selection Sort).md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EC%84%A0%ED%83%9D%20%EC%A0%95%EB%A0%AC(Selection%20Sort).md)
 
+[[퀵 정렬(Quick Sort)]]
+
+[[병합 정렬(Merge Sort)]]
+
 # 2. CS
 
 ### A. 운영체제
 
 [Study/운영체제 (Operating System).md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Operating%20System/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20(Operating%20System).md)
+
+### B. 자료구조
+
+[[Linked List]]
+
+### C. 컴퓨터 아키텍쳐
+
+[[Computer Architecture]]
+
+### D. 이산수학
+
+[[보수]]
+
+### E. 데이터 베이스
+
+[[DataBase]]
+
+### F. 네트워크
+
+[[Network]]
 
 # 3. Language
 
