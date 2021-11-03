@@ -10,9 +10,9 @@
 
 [[병합 정렬(Merge Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EB%B3%91%ED%95%A9%20%EC%A0%95%EB%A0%AC(Merge%20Sort).md)
 
-[[힙 정렬(Heap Sort)]]
+[[힙 정렬(Heap Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%ED%9E%99%20%EC%A0%95%EB%A0%AC(Heap%20Sort).md)
 
-[[계수 정렬(Counting Sort)]]
+[[계수 정렬(Counting Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EA%B3%84%EC%88%98%20%EC%A0%95%EB%A0%AC(Counting%20Sort).md)
 
 # 2. CS
 
@@ -42,7 +42,7 @@
 
 ### G. 소프트웨어 공학
 
-[[Software Engineering]]
+[[Software Engineering]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Software%20Engineering/Software%20Engineering.md)
 
 
 # 3. Language
@@ -51,11 +51,11 @@
 
 ### A . JAVA
 
-[[JAVA]]
+[[JAVA]](https://github.com/mildsalmon/Study/blob/master/Interview/Language/JAVA.md)
 
 ### B. Python
 
-[[Python]]
+[[Python]](https://github.com/mildsalmon/Study/blob/master/Interview/Language/Python.md)
 
 # 4. 태도
 
