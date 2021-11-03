@@ -18,7 +18,7 @@
 
 이들은 시스템 버스로 연결되어 있으며, 시스템 버스는 데이터와 명령 제어 신호를 각 장치로 실어나르는 역할을 한다.
 
-### a. [[중앙처리장치 (CPU)]]
+### a. [[중앙처리장치 (CPU)]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Computer%20Architecture/%EC%A4%91%EC%95%99%EC%B2%98%EB%A6%AC%EC%9E%A5%EC%B9%98%20(CPU).md)
 
 인간의 두뇌에 해당하는 부분
 
@@ -28,7 +28,7 @@
 
 개인용 컴퓨터와 같은 소형 컴퓨터에서는 CPU를 마이크로프로세서라고도 부름
 
-[[캐시 메모리 (Cache Memory)]]
+[[캐시 메모리 (Cache Memory)]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Computer%20Architecture/%EC%BA%90%EC%8B%9C%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20(Cache%20Memory).md)
 
 ### b. 기억장치
 
@@ -95,12 +95,12 @@
 
 ## C. 소수점
 
-[[고정 소수점 & 부동 소수점]]
+[[고정 소수점 & 부동 소수점]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Computer%20Architecture/%EA%B3%A0%EC%A0%95%20%EC%86%8C%EC%88%98%EC%A0%90%20%26%20%EB%B6%80%EB%8F%99%20%EC%86%8C%EC%88%98%EC%A0%90.md)
 
 ## D. 패리티 비트 & 해밍 코드
 
-[[패리티 비트 & 해밍 코드]]
+[[패리티 비트 & 해밍 코드]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Computer%20Architecture/%ED%8C%A8%EB%A6%AC%ED%8B%B0%20%EB%B9%84%ED%8A%B8%20%26%20%ED%95%B4%EB%B0%8D%20%EC%BD%94%EB%93%9C.md)
 
 ## E. ARM 프로세서
 
-[[ARM 프로세서]]
+[[ARM 프로세서]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Computer%20Architecture/ARM%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C.md)
