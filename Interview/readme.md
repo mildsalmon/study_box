@@ -6,9 +6,9 @@
 
 [Study/선택 정렬(Selection Sort).md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EC%84%A0%ED%83%9D%20%EC%A0%95%EB%A0%AC(Selection%20Sort).md)
 
-[[퀵 정렬(Quick Sort)]]
+[[퀵 정렬(Quick Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%ED%80%B5%20%EC%A0%95%EB%A0%AC(Quick%20Sort).md)
 
-[[병합 정렬(Merge Sort)]]
+[[병합 정렬(Merge Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EB%B3%91%ED%95%A9%20%EC%A0%95%EB%A0%AC(Merge%20Sort).md)
 
 [[힙 정렬(Heap Sort)]]
 
@@ -22,23 +22,23 @@
 
 ### B. 자료구조
 
-[[Linked List]]
+[[Linked List]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Data%20Structure/Linked%20List.md)
 
 ### C. 컴퓨터 아키텍쳐
 
-[[Computer Architecture]]
+[[Computer Architecture]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Computer%20Architecture/Computer%20Architecture.md)
 
 ### D. 이산수학
 
-[[보수]]
+[[보수]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Discrete%20Math/%EB%B3%B4%EC%88%98.md)
 
 ### E. 데이터 베이스
 
-[[DataBase]]
+[[DataBase]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/DataBase/DataBase.md)
 
 ### F. 네트워크
 
-[[Network]]
+[[Network]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Network/Network.md)
 
 ### G. 소프트웨어 공학
 
