@@ -10,6 +10,10 @@
 
 [[병합 정렬(Merge Sort)]]
 
+[[힙 정렬(Heap Sort)]]
+
+[[계수 정렬(Counting Sort)]]
+
 # 2. CS
 
 ### A. 운영체제
@@ -36,8 +40,31 @@
 
 [[Network]]
 
+### G. 소프트웨어 공학
+
+[[Software Engineering]]
+
+
 # 3. Language
 
-[Study/기초.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Language/%EA%B8%B0%EC%B4%88.md)
+[Study/언어별 특징.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Language/%EA%B8%B0%EC%B4%88.md)
 
+### A . JAVA
 
+[[JAVA]]
+
+### B. Python
+
+[[Python]]
+
+# 4. 태도
+
+- 모르는 것을 질문 받았을 때,
+	- 정말 좋은 질문이십니다. 다만, 제가 거기까지는 생각해보지 못해서 잘 모르겠습니다. 혹시 ~이런 이런 개념인가요?
+	- 혹시 방금 질문하신 내용에 대해서 설명해주실 수 있으신가요?
+
+- 마지막 질문
+	- 질문 중에 몰랏던 것에 대해 설명을 다시 해주실 수 있는지?
+	- 회사에 입사하게 된다면, 코드 리뷰는 어떤 식으로 진행되나요?
+	- 제가 들어갈 팀의 규모는 어떻게 되나요?
+	- 제가 아직 많이 모르는 주니어 개발자인데, 오늘 면접이 정말 저에게 많은 도움이 되었습니다. 감사합니다.
