@@ -14,6 +14,10 @@
 
 [[계수 정렬(Counting Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EA%B3%84%EC%88%98%20%EC%A0%95%EB%A0%AC(Counting%20Sort).md)
 
+[[이분 탐색(Binary Search)]]
+
+[[해시 테이블(Hash Table)]]
+
 # 2. CS
 
 ### A. 운영체제
