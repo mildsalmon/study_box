@@ -19,3 +19,30 @@ GIL은 한번에 하나의 스레드만 수행할 수 있도록 인터프리터�
 reference counting 방식과 generational garbage collection 방식이 있다.
 
 다른 객체가 해당 객체를 참조한다면 reference counting이 증가하고 참조가 해제되면 감소한다. reference counting이 0이 된다면, 객체의 메모리 할당이 해제된다.
+
+# 4. immutable 객체와 mutable 객체
+
+## A. immutable 객체
+
+**변경 불가능한 객체**
+
+만들어진 이후에는 바뀔 수 없다는 것을 의미한다.
+
+- int, float, bool, str, tuple, unicode
+
+## B. mutable 객체
+
+**변경 가능한 객체**
+
+만들어진 이후에 바뀔 수 있다는 것을 의미한다.
+
+- List, Set, Dict
+
+# 5. Call by assignment (call by object-reference)
+
+파이썬은 call by value, call by reference가 아닌 call by assignment이다.
+
+mutable 객체를 바꾸는 것이 아닌, 객체 내의 원소(element, 요소)를 변경하는 것이다.
+
+immutable 한 포멧의 객체 (tuple, int 등)는 변경할 수 없지만, mutable 한 포멧의 객체 (list, dict, set 등)는 변경할 수 있다는 특성을 갖는다.
+

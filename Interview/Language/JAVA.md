@@ -71,3 +71,11 @@ implements를 통해 2개 이상 상속(다중 상속)받을 수 있음.
 정의된 메소드를 implements 받은 곳에서 구현을 강제함.
 
 **기본 설계도**
+
+# 5. Call by value
+
+자바는 call by reference가 없다.
+
+> 매개변수를 넘기는 과정에서 직접적인 참조를 넘긴 게 아닌, 주소 값을 복사해서 넘기기 때문에 이는 call by value이다. 복사된 주소 값으로 참조가 가능하니 주소 값이 가리키는 객체의 내용이 변경되는 것이다.
+
+[[Java] Java는 Call by reference가 없다 (tistory.com)](https://deveric.tistory.com/92)
