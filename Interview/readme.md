@@ -14,9 +14,9 @@
 
 [[계수 정렬(Counting Sort)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EA%B3%84%EC%88%98%20%EC%A0%95%EB%A0%AC(Counting%20Sort).md)
 
-[[이분 탐색(Binary Search)]]
+[[이분 탐색(Binary Search)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EC%9D%B4%EB%B6%84%20%ED%83%90%EC%83%89(Binary%20Search).md)
 
-[[해시 테이블(Hash Table)]]
+[[해시 테이블(Hash Table)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%ED%95%B4%EC%8B%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94(Hash%20Table).md)
 
 # 2. CS
 
@@ -26,7 +26,7 @@
 
 ### B. 자료구조
 
-[[Linked List]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Data%20Structure/Linked%20List.md)
+[[Data Structrue]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Data%20Structure/Data%20Structrue.md)
 
 ### C. 컴퓨터 아키텍쳐
 
@@ -72,3 +72,5 @@
 	- 회사에 입사하게 된다면, 코드 리뷰는 어떤 식으로 진행되나요?
 	- 제가 들어갈 팀의 규모는 어떻게 되나요?
 	- 제가 아직 많이 모르는 주니어 개발자인데, 오늘 면접이 정말 저에게 많은 도움이 되었습니다. 감사합니다.
+
+제가 남들보다 절대적으로 뛰어나다고 자신있게 말씀드리지는 못하겠습니다. 다만, 남들과 비교할때 저는, 기록의 중요성을 알고 무엇이든 알아보기 쉽게 기록하고자 합니다.(읽는 사람이 편하게 읽을 수 있도록 기록하고자 합니다.) 그리고 6개월이라는 짧은 기간 동안 인공지능을 공부한적이 있습니다. 따라서 새로운 것에도 빠르게 적응하는 편입니다. 또한, 졸업 작품 주제로 생소하고 꺼려지는 주제인 의료 시스템 개발에 시도해서 끝까지 완료한 경험이 있습니다.
