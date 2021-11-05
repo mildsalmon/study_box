@@ -18,6 +18,10 @@
 
 [[해시 테이블(Hash Table)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%ED%95%B4%EC%8B%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94(Hash%20Table).md)
 
+[[DFS & BFS]]
+
+[[최장 증가 수열 (Longest Increasing Sequence)]]
+
 # 2. CS
 
 ### A. 운영체제
