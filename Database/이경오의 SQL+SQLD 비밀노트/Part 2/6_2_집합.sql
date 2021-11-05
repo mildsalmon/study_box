@@ -1,0 +1,105 @@
+SELECT A.INDUTY_CL_CD AS 업종분류코드
+FROM TB_INDUTY_CL A
+WHERE A.INDUTY_CL_SE_CD = 'ICS001'
+    AND A.INDUTY_CL_CD = 'Q'
+UNION
+SELECT A.UPPER_INDUTY_CL_CD AS 상위업종분류코드
+FROM TB_INDUTY_CL A
+WHERE INDUTY_CL_SE_CD = 'ICS002'
+    AND A.INDUTY_CL_CD LIKE 'Q%'
+;
+
+SELECT A.INDUTY_CL_CD AS 업종분류코드
+FROM TB_INDUTY_CL A
+WHERE A.INDUTY_CL_SE_CD = 'ICS001'
+    AND A.INDUTY_CL_CD = 'Q'
+UNION ALL
+SELECT A.UPPER_INDUTY_CL_CD AS 상위업종분류코드
+FROM TB_INDUTY_CL A
+WHERE INDUTY_CL_SE_CD = 'ICS002'
+    AND A.INDUTY_CL_CD LIKE 'Q%'
+;
+
+SELECT A.INDUTY_CL_CD, A.INDUTY_CL_NM
+FROM TB_INDUTY_CL A
+WHERE INDUTY_CL_SE_CD = 'ICS002'
+    AND A.INDUTY_CL_CD LIKE 'N%'
+UNION ALL
+SELECT B.INDUTY_CL_CD AS 업종분류코드, B.INDUTY_CL_NM AS 업종분류명
+FROM TB_INDUTY_CL B
+WHERE B.INDUTY_CL_SE_CD = 'ICS002'
+AND B.INDUTY_CL_CD LIKE 'O%'
+ORDER BY INDUTY_CL_CD
+;
+
+SELECT A.SUBWAY_STATN_NO
+        , A.LN_NM
+        , A.STATN_NM
+FROM TB_SUBWAY_STATN A
+WHERE A.STATN_NM = '신도림'
+INTERSECT
+SELECT B.SUBWAY_STATN_NO
+        , B.LN_NM
+        , B.STATN_NM
+FROM TB_SUBWAY_STATN B
+WHERE B.LN_NM = '2호선'
+ORDER BY SUBWAY_STATN_NO
+;
+
+SELECT A.SUBWAY_STATN_NO
+        , A.LN_NM
+        , A.STATN_NM
+FROM TB_SUBWAY_STATN A
+WHERE A.STATN_NM = '신도림'
+    AND A.LN_NM = '2호선'
+ORDER BY SUBWAY_STATN_NO
+;
+
+SELECT A.SUBWAY_STATN_NO
+        , A.LN_NM
+        , A.STATN_NM
+FROM TB_SUBWAY_STATN A
+WHERE STATN_NM = '신도림'
+    AND EXISTS (SELECT 1
+                        FROM  TB_SUBWAY_STATN K
+                        WHERE K.SUBWAY_STATN_NO = A.SUBWAY_STATN_NO
+                            AND K.LN_NM = '2호선')
+ORDER BY SUBWAY_STATN_NO
+;
+
+SELECT A.LN_NM
+FROM TB_SUBWAY_STATN A
+WHERE A.STATN_NM = '선릉'
+MINUS
+SELECT B.LN_NM
+FROM TB_SUBWAY_STATN B
+WHERE B.STATN_NM = '강남'
+;
+
+SELECT '선릉' AS 역명 FROM DUAL
+UNION ALL
+SELECT '선릉' AS 역명 FROM DUAL
+MINUS
+SELECT '강남' AS 역명 FROM DUAL
+;
+
+SELECT *
+FROM
+(
+    SELECT '선릉' AS 역명 FROM DUAL
+    UNION ALL
+    SELECT '선릉' AS 역명 FROM DUAL
+) X
+WHERE NOT EXISTS (
+                                    SELECT 1
+                                    FROM
+                                    (
+                                        SELECT '강남' AS 역명
+                                        FROM DUAL
+                                    ) A
+                                    WHERE A.역명 = X.역명
+                                )
+;      
+
+
+
