@@ -22,13 +22,13 @@
 
 [[최장 증가 수열 (Longest Increasing Sequence)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EC%B5%9C%EC%9E%A5%20%EC%A6%9D%EA%B0%80%20%EC%88%98%EC%97%B4%20(Longest%20Increasing%20Sequence).md)
 
-[[최소 공통 조상 (Lowest Common Ancestor)]]
+[[최소 공통 조상 (Lowest Common Ancestor)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EC%B5%9C%EC%86%8C%20%EA%B3%B5%ED%86%B5%20%EC%A1%B0%EC%83%81%20(Lowest%20Common%20Ancestor).md)
 
-[[동적 계획법 (Dynamic Programming)]]
+[[동적 계획법 (Dynamic Programming)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95%20(Dynamic%20Programming).md)
 
-[[다익스트라(Dijkstra) 알고리즘]]
+[[다익스트라(Dijkstra) 알고리즘]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC(Dijkstra)%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 
-[[비트마스크 (BitMask)]]
+[[비트마스크 (BitMask)]](https://github.com/mildsalmon/Study/blob/master/Interview/Algorithm/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%AC%20(BitMask).md)
 
 # 2. CS
 
