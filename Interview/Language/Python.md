@@ -179,6 +179,97 @@ Out[12]: '0b1010'
 
 ```
 
+# 7. 메타 클래스 (Meta Class)
+
+클래스로 객체를 만들 듯 메타 클래스로 클래스를 만들 수 있다는 의미이다.
+
+**type()** 이 메타 클래스이다.
+
+type() 메타 클래스로 클래스를 만들면 아래와 같다.
+
+```python
+
+In[1]: a = type('temp', (), {})
+In[2]: a
+
+Out[2]: __main__.temp
+
+```
+
+(), {}는 각각 튜플과 딕셔너리로 상속 클래스 정의와 클래스에서 정의할 속성과 메서드가 들어간다.
+
+```python
+
+In[3]: class temp:
+	    a = 3
+	    def m(self, m, n):
+	        return m + n
+In[4]: ins = temp()
+
+Out[4]: ins.m(3,4)
+
+```
+
+이 클래스를 type() 이용해 만들면 다음과 같다.
+
+```python
+
+In[5]: ins = type('temp', (object,), {'a':3, 'm':lambda a, b: a+b})
+In[6]: ins.m(3,4)
+
+Out[6]: 7
+	
+```
+
+- 첫 번째 인자는 클래스명, 
+- 두 번째 인자는 상속 시켜줄 부모 클래스, 
+- 세 번째 인자는 클래스에서 명시할 속성과 메서드.	
+	- 메서드는 lambda를 사용해도 되고 함수를 하나 만들어 변수에 넣고 그 변수를 여기에 명시해도 된다.
+
+## A. 메타클래스로 할 수 있는 것
+
+1. 위 예시처럼 동적으로 클래스를 만들 수 있다. 클래스에 명시되는 속서오가 메서드를 딕셔너리에 넣으면 되니 동적으로 만드는 것이 어렵지 않다.
+2. 커스텀 메타 클래스를 만들 수 있다.
+
+커스텀 메타 클래스를 활용하면 클래스를 컨트롤해 원하는 방향으로 클래스가 생성되게 만들 수 있다.
+
+클래스가 만들어 질 때 특정 속성은 반드시 정수가 되도록 만들어보자. 검증 과정은 메타 클래스에서 중요한 부분이 될 수 있다.
+
+```python
+
+In[7]: class myMetaclass(type):
+			def __new__(cls, clsname, bases, dct):
+				assert type(dct['a']) is int, 'a속성이 정수가 아니에요.'
+				return type.__new__(cls, clsname, bases, dct)
+			
+		class temp(metaclass=myMetaclass):
+			a = 3.14
+
+		ins = temp()
+
+Out[7]:	Traceback (most recent call last):
+		  File "C:\python\anaconda3_64\Lib\site-packages\IPython\core\interactiveshell.py", line 3437, in run_code
+			exec(code_obj, self.user_global_ns, self.user_ns)
+		  File "<ipython-input-8-37f754f405f1>", line 7, in <module>
+			class temp(metaclass=myMetaclass):
+		  File "<ipython-input-8-37f754f405f1>", line 4, in __new__
+			assert type(dct['a']) is int, 'a속성이 정수가 아니에요.'
+		AssertionError: a속성이 정수가 아니에요.
+
+```
+
+커스텀 메타 클래스를 만들기 위해서는 type 클래스를 상속받아야 한다. 그리고 type클래스가 가지고 있는 new 메서드를 오버라이드하면 된다. 이 메서드에 하고 싶은 것을 명시하면 된다.
+
+new메서드에 필요한 인자는 4개인데, 마지막 dct인자에 메타 클래스로 클래스를 만들 때 속성과 메서드를 이곳에 명시하면 된다.
+
+assert로 검증을 시도한다. 속성 중 a라는 속성에 대해 정수인지 검증한다.
+
+new메서드에서 반환해야 할 값은 type.new() 메서드로 받은 클래스이다.
+
+테스트하기 위해 메타 클래스를 사용해야 하는데 클래스를 만들면서 `metaclass=`라는 인자에 명시하면 된다.
+
+
+
 # 참고자료
 
 [1] 빌노트. [파이썬 비트연산자 사용법 정리 (Python 비트연산) (withcoding.com)](https://withcoding.com/69). Tistory. (accessed Nov 8. 2021)
