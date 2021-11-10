@@ -268,7 +268,185 @@ new메서드에서 반환해야 할 값은 type.new() 메서드로 받은 클래
 
 테스트하기 위해 메타 클래스를 사용해야 하는데 클래스를 만들면서 `metaclass=`라는 인자에 명시하면 된다.
 
+# 8. PyQt 시그널/슬롯
 
+## A. 시그널
+
+위젯에 정의된 이벤트
+
+## B. 슬롯
+
+이벤트가 발생할 때 호출되는 함수나 메서드
+
+# 9. 상수
+
+파이썬에는 상수가 없다.
+
+# 10. 정적 메소드 (Static Method, Class Method)
+
+- 공통점
+	- 인스턴스를 만들지 않아도 class의 메서드를 바로 실행할 수 있다.
+
+## A. @staticmethod
+
+```python
+
+#staticmethod
+class hello:
+    num = 10
+
+    @staticmethod
+    def calc(x):
+        return x + 10
+
+print(hello.calc(10))
+#결과
+20
+
+```
+
+매개변수에 `self`를 지정하지 않는다.
+
+self를 받지 않으므로 인스턴스 속성에는 접근할 수 없다. 그래서 보통 정적 메소드를 사용할 때는 인스턴스 속성, 인스턴스 메서드가 필요 없을 때 사용한다.
+
+정적 메서드는 메서드의 실행이 외부 상태에 영향을 끼치지 않는 순수 함수를 만들 때 사용해야 한다. 순수 함수는 입력 값이 같으면 언제나 같은 출력 값을 반환한다. 즉, 인스턴스의 상태를 변화시키지 않는 메서드를 만들 때 사용한다.
+
+## B. @classmethod
+
+```python
+
+#classmethod
+class hello:
+    num = 10
+
+    @classmethod
+    def calc(cls, x):
+        return x + 10
+
+print(hello.calc(10))
+#결과
+20
+
+-------------------------------------
+
+#classmethod
+class hello:
+    num = 10
+
+    @classmethod
+    def calc(cls, x):
+        return x + 10 + cls.num
+
+print(hello.calc(10))
+#결과
+30
+
+```
+
+staticmethod와 다르게 cls 인자가 추가된다.
+
+cls는 클래스를 가리킨다. 이것으로 클래스의 어떤 속성에도 접근할 수 있다.
+
+```python
+
+class hello:
+    t = '내가 상속해 줬어'
+
+    @classmethod
+    def calc(cls):
+        return cls.t
+
+class hello_2(hello):
+    t = '나는 상속 받았어'
+
+print(hello_2.calc())
+#결과
+나는 상속 받았어
+
+```
+
+상속 관계에 있는 클래스들에서는 cls는 상속받은 클래스(hello_2)의 값(t)이 출력된다.
+
+클래스 메서드는 메서드 안에서 클래스 속성, 클래스 메서드에 접근해야 할 때 사용한다.
+
+# 11. 언더스코어와 더블 언더스코어
+
+## A. 언더스코어 (\_, Single Underscore)
+
+언더스코어를 사용한 변수는 프로그래머한테 private처럼 사용할테니 외부에서 접근하지 말라는 의미이다.
+
+이 경우, 해당 모듈을 외부에서 참조할 경우 변수가 없는 것처럼 보이나 실제로는 접근 가능하다.
+
+접근제한을 권유하지만 강제하진 않는다. 언더스코어를 붙인다는 것은 일종의 컨벤션이다.
+
+```python
+
+class A:  
+_a = 1  
+a = 2  
+b = 3  
+  
+print(dir(A))  
+print(A._a)
+
+#결과
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_a', 'a', 'b']
+1
+
+```
+
+## B. 더블 언더스코어 (\_\_, Double Underscore)
+
+더블언더스코어도 private를 구현하기 위해 사용한다. 하지만 접근 자체가 불가능하다.
+
+더블언더스코어 사용은 애초에 클래스 안에 비슷한 이름들끼리 충돌을 방지하기 위해서 사용한다.
+
+```python
+
+class A:  
+_a = 1  
+a = 2  
+b = 3  
+  
+print(dir(A))  
+print(A._a)
+
+#결과
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_a', 'a', 'b']
+1
+
+#결과
+
+['_A__a', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'a', 'b']
+Traceback (most recent call last):
+  File "D:/CloudStation/SourceCode/PS/del/12.py", line 7, in <module>
+    print(A._a)
+AttributeError: type object 'A' has no attribute '_a'
+
+```
+
+```python
+
+class A:  
+__a = 1  
+a = 2  
+b = 3  
+  
+z = A()  
+  
+print(dir(A))  
+print(z._A__a)
+
+#결과
+
+['_A__a', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'a', 'b']
+1
+
+```
+
+더블언더스코어(\_\_a)에 접근하기 위해서는 치환된 변수명을 알아야한다. 예제에서 치환된 변수명은 `_A__a`이다. 그래서 `_A__a`로 접근할 수 있다.
 
 # 참고자료
 
