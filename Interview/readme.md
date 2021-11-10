@@ -62,7 +62,7 @@
 
 ### H. 보안
 
-[[Security]]
+[[Security]](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Security/Security.md)
 
 # 3. Language
 
