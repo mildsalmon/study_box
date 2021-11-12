@@ -221,9 +221,29 @@ TCP는 정확한 전송을 보장해야 한다. 따라서 통신하기에 앞서
 4. 만약, 없다면 dns server에서 ip를 조회한다.
 5. 조회된 ip에 접속한다.
 6. 서버와 3 way handshake를 진행한다.
-	1. client에서 server에게 syn 패킷을 보낸다.
-	2. server에서 client에 syn + ack 패킷을 보낸다.
-	3. client에서 server에게 ack 패킷을 보낸다.
+    1. client에서 server에게 syn 패킷을 보낸다.
+    2. server에서 client에 syn + ack 패킷을 보낸다.
+    3. client에서 server에게 ack 패킷을 보낸다.
 7. 서버에 naver.com을 요청(request)한다.
 8. 서버에서 naver.com을 응답(response)한다.
 9. 서버에서 응답한 내용을 웹 클라이언트에서 해석하여 출력한다.
+
+# 8. GET, POST 차이
+
+## A. GET
+
+> 어떠한 정보를 조회하기 위해서 사용한다.
+
+- URL에 변수(데이터)를 포함시켜 요청한다.
+- 데이터를 Header(헤더)에 포함하여 전송한다.
+- URL에 데이터가 노출되어 보안에 취약하다
+- 캐싱할 수 있다.
+
+## B. POST
+
+> 어떠한 정보를 추가 또는 수정하기 위해서 사용한다.
+
+- URL에 변수(데이터)를 노출하지 않고 요청한다.
+- 데이터를 Body(바디)에 포함시킨다.
+- URL에 데이터가 노출되지 않아서 기본 보안은 되어있다.
+- 캐싱할 수 없다.
