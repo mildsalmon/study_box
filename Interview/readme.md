@@ -96,5 +96,5 @@
 
 # 5. BigData
 
-[[BigData]]
+[[BigData]](https://github.com/mildsalmon/Study/blob/master/Interview/BigData.md)
 
