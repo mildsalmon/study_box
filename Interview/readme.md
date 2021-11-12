@@ -34,7 +34,7 @@
 
 ### A. 운영체제
 
-[Study/운영체제 (Operating System).md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Operating%20System/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20(Operating%20System).md)
+[운영체제](https://github.com/mildsalmon/Study/blob/master/Interview/Computer%20Science/Operating%20System/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20(Operating%20System).md)
 
 ### B. 자료구조
 
