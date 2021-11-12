@@ -522,3 +522,5 @@ B+ Tree는 index 노드와 leaf 노드로 분리되어 저장됨
 
 B Tree는 각 노드에서 key와 data 모두 들어갈 수 있고, data는 disk block으로 포인터가 될 수 있음
 B+ Tree는 각 노드에서 key만 들어감. 따라서 data는 모두 leaf 노드에만 존재. B+ Tree는 add와 delete가 모두 leaf 노드에서만 이루어짐.
+
+# 13. 빅오 표기법
