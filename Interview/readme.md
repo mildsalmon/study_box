@@ -78,7 +78,7 @@
 
 ### C. C
 
-[[C]]
+[[C]](https://github.com/mildsalmon/Study/blob/master/Interview/Language/C.md)
 
 # 4. 태도
 
