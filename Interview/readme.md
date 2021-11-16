@@ -76,6 +76,10 @@
 
 [[Python]](https://github.com/mildsalmon/Study/blob/master/Interview/Language/Python.md)
 
+### C. C
+
+[[C]]
+
 # 4. 태도
 
 - 모르는 것을 질문 받았을 때,
@@ -122,6 +126,7 @@
 ##### d. SSAFY
 
 ##### e. Naver AI 부트캠프
+
 
 # 5. BigData
 
