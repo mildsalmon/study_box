@@ -290,10 +290,110 @@ static 변수는 클래스 변수이다.
 	- 객체를 캡슐로 싸서 내부를 보호하고 볼 수 없게 하는 것으로 객체의 가장 본질적인 특징이다.
 		- 데이터 캡슐화
 		- 은닉화
-- 상속
+- 상속성
 	- class의 데이터와 메소드를 다른 class에 물려주거나 물려받는것.
 	- 상속받은 메소드를 추가적으로 데이터와 메소드내용 재사용 가능하다.
 - 다형성
 	- 같은 이름의 메소드가 클래스 혹은 객체에 따라 다르게 동작하도록 구현되는 것을 말한다.
 		- 오버라이딩
 		- 오버로딩
+
+# 13. Casting (업캐스팅 & 다운캐스팅)
+
+## A. 캐스팅이란?
+
+변수가 원하는 정보를 다 갖고 있는 것
+
+```
+int a = 0.1; // (1) 에러 발생 X
+int b = (int) true; // (2) 에러 발생 O, boolean은 int로 캐스트 불가
+```
+
+(1)은 0.1이 double형이지만, int로 될 정보 또한 가지고 있음
+(2)는 true는 int형이 될 정보를 가지고 있지 않음
+
+### a. 캐스팅이 필요한 이유는?
+
+1. 다형성
+	- 오버라이딩된 함수를 분리해서 활용할 수 있다.
+2. 상속
+	- 캐스팅을 통해 범용적인 프로그래밍이 가능하다.
+
+## B. 형변환의 종류
+
+1. 묵시적 형변환 (업캐스팅)
+	- 캐스팅이 자동으로 발생
+		```
+		Parent p = new Child(); // (Parent) new Child()할 필요가 없음
+		```
+
+		> Parent를 상속받은 Child는 Parent의 속성을 포함하고 있기 때문
+2. 명시적 형변환 (다운캐스팅)
+	- 캐스팅할 내용을 적어줘야 하는 경우
+		```
+		Parent p = new Child();
+		Child c = (Child) p;
+		```
+
+		> 다운캐스팅은 업캐스팅이 발생한 이후에 작용한다.
+
+### a. 예시 문제
+
+```
+class Parent {
+	int age;
+
+	Parent() {}
+
+	Parent(int age) {
+		this.age = age;
+	}
+
+	void printInfo() {
+		System.out.println("Parent Call!!!!");
+	}
+}
+
+class Child extends Parent {
+	String name;
+
+	Child() {}
+
+	Child(int age, String name) {
+		super(age);
+		this.name = name;
+	}
+
+	@Override 
+	void printInfo() {
+		System.out.println("Child Call!!!!");
+	}
+
+}
+
+public class test {
+    public static void main(String[] args) {
+        Parent p = new Child();
+        
+        p.printInfo(); // 문제1 : 출력 결과는?
+        Child c = (Child) new Parent(); //문제2 : 에러 종류는?
+    }
+}
+```
+
+#### 1) 문제1 : `Child Call!!!!`
+
+자바에서는 오버라이딩된 함수를 동적 바인딩하기 때문에, Parent에 담겼어도 Child의 printInfo() 함수를 불러오게 된다.
+
+#### 2) 문제2 : `Runtime Error`
+
+컴파일 과정에서는 데이터형의 일치만 따진다. 프로그래머가 따로 (Child)로 형변환을 해줬기 때문에 컴파일러는 문법이 맞다고 생각해서 넘어간다. 하지만 런타임 과정에서 Child 클래스에 Parent 클래스를 넣을 수 없다는 것을 알게 되고, 런타임 에러가 나오게 되는것!
+
+# 14. 스레드 생성 방식
+
+Runnable (인터페이스)이나 Thread 클래스 (상속)를 상속받아서 run() 메소드를 구현해준다.
+
+- 장점
+	- 빠른 프로세스 생성, 메모리를 적게 사용 가능, 정보 공유가 쉬움
+- 단점
+	- 데드락에 빠질 위험이 존재
