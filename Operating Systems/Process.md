@@ -226,6 +226,101 @@ cache memory flush
 
 ![](/bin/OS_image/os_3_10.png)
 
+# 7. Thread
+
+> A thread (or lightweight process) is a basic unit of CPU utilization
+> 쓰레드는 CPU를 수행하는 단위
+
+> 쓰레드는 프로세스 내부에 CPU 수행 단위가 여러개 있는 경우를 뜻함.
+
+- 쓰레드의 개념
+	- 메모리 공간을 하나만 띄워놓고, 각 프로세스마다 다른 부분의 코드를 실행하게 하는 것.
+	- 프로세스는 하나만 띄워놓고, (코드, 데이터, 스택). 현재 CPU가 코드의 어느 부분을 실행하고 있는가(PC만 여러개 두는 것)
+	- 프로세스 하나에 CPU 수행 단위만 여러개 두고 있는 것.
+	- 각 쓰레드마다, 현재 register에 어떤 값을 넣고, PC가 코드의 어떤 부분을 가리키며 실행하고 있었는가 별도로 유지한다.
+	- 쓰레드가 코드를 실행하면서 함수 호출을 하면, 함수를 호출하고 리턴하는 것과 관련된 정보를 별도의 쓰레드 스택에 저장한다.
+
+```
+- 프로세스의 자원과 상태 공유
+- CPU 수행과 관련된 정보는 별도로 갖는다. (PC, register, stack)
+```
+
+- Thread의 구성
+	- program counter
+	- register set
+	- stack space
+- Thread가 동료 thread와 공유하는 부분 (= task)
+	- code section
+	- data section
+	- OS resources
+
+> 전통적인 개념의 heavyweight process는 하나의 thread를 가지고 있는 task로 볼 수 있다.
+
+![](/bin/OS_image/os_3_11.png)
+
+![](/bin/OS_image/os_3_12.png)
+
+## A. 장점
+
+- 다중 스레드로 구성된 테스크 구조에서는 하나의 서버 스레드가 blocked (waiting) 상태인 동안에도 동일한 테스크 내의 다른 스레드가 실행(running)되어 빠른 처리를 할 수 있다.
+- 동일한 일을 수행하는 다중 스레드가 협력하여 높은 처리율(throughput)과 성능 향상을 얻을 수 있다.
+- 스레드를 사용하면 병렬성을 높일 수 있다.
+
+```ad-example
+
+- 웹 브라우저를 여러개의 스레드를 사용하여 만들면, 웹 페이지를 불러올 때, 여러개의 스레드가 텍스트, 이미지를 따로 불러와서 출력한다.
+
+=> 사용자에게 빠른 응답성을 제공한다.
+
+- 동일한 프로세스 내의 스레드는 자원을 공유하므로 메모리를 절약할 수 있다.
+
+- CPU가 여러개 달린 컴퓨터에서 얻을 수 있는 장점
+	- 1000 * 1000 행렬에서 각 행과 열을 곱하는 독립적인 연산을 각 CPU에서 실행하고 합치면 더 빨리 결과가 나올 수 있다.
+	- 이때, 여러개의 스레드를 사용하면, 각 스레드들이 서로 다른 CPU에서 실행되어 병렬적으로 실행되기 때문에 더 빨리 결과를 얻을 수 있음.
+
+```
+
+## B. Single and Multithreaded Process
+
+![](/bin/OS_image/os_3_13.png)
+
+## C. Benefits of Thread (쓰레드의 장점)
+
+1. Responsiveness (응답성)
+	- 사용자 입장에서 빠르다.
+		```ad-example
+
+		multi-threaded Web - if one thread is blocked (eg. network) another thread continues (eg. display)
+
+		```
+1. Resource Sharing (자원 공유)
+	- n threads can share binary code, data, resource of the process
+2. Economy (경제적이다.)
+	- creating & CPU switching thread (rather than a process)
+	- Solaris의 경우 위 두 가지 overhead가 각각 30배, 5배
+		```ad-example
+
+		- 프로세스를 만드는 것은 오버헤드가 큼, 그러나 프로세스 안에 스레드를 만드는 것은 숟가락 하나만 얹는 것과 같아서 오버헤드가 크지 않음.
+		- context switching이 발생할 때, 하나의 프로세스에서 다른 프로세스로 CPU가 넘어가는 것은 오버헤드가 큼(현재 진행상태를 PCB에 저장하고 캐시 메모리를 flush하고), 프로세스 내부에서 쓰레드 간에 CPU 스위치가 발생하는 것은 간단함(동일한 주소공간을 쓰고 있기 때문에 대부분의 문맥은 그냥 사용할 수 있음)
+
+		```
+3. Utilization of MP(multi processor) Architectures (CPU가 여러개인 환경에서 얻을 수 있는 장점)
+	- each thread may be running in parallel on a different processor
+
+## D. Implementation of Threads
+
+- Some are supported by kernel (**Kernel Threads**)
+	- Windows 95/98/NT
+	- Solaris
+	- Digital UNIX, Mach
+	> 쓰레드가 여러개 있다는 것을 운영체제 커널이 알고있다. 따라서 하나의 스레드에서 다른 스레드로 CPU가 넘어가는 것도 커널이 CPU 스케줄링하듯 넘겨준다.
+- Other are supported by library (**User Threads**)
+	- POSIX Pthreads
+	- Mach C-threads
+	- Solaris threads
+	> 프로세스 안에 쓰레드가 여러개 있다는 사실을 운영체제는 모름. User 프로그램이 스스로 여러개의 쓰레드를 관리하는 것 (라이브러리의 지원을 받아서 관리함).
+- Some are real-time threads
+
 # 참고자료
 
 [1] 반효경, [Process 1](javascript:void(0);). kocw. [운영체제 - 이화여자대학교 | KOCW 공개 강의](http://www.kocw.net/home/cview.do?cid=3646706b4347ef09). (accessed Nov 24, 2021)
