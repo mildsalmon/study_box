@@ -83,6 +83,267 @@ CPU 스케줄링이 필요한 경우는 프로세스에게 다음과 같은 상�
 	- 강제로 빼앗음
 	- 선점
 
+## C. CPU 스케줄링이 필요한 경우
+
+CPU 스케줄링이 필요한 경우는 프로세스에게 다음과 같은 상태 변화가 있는 경우이다.
+
+1. Running -> Blocked
+	- 예) I/O 요청하는 시스템 콜
+2. Running -> Ready
+	- 예) 할당시간만료로 timer interrupt
+3. Blocked -> Ready
+	- 예) I/O 완료후 인터럽트
+4. Terminate
+
+- 1, 4에서의 스케줄링은 nonpreemptive
+	- 강제로 빼앗지 않고 자진 반납
+	- 비선점형
+- All other scheduling is preemptive
+	- 강제로 빼앗음
+	- 선점형
+
+# 5. Scheduling Algorithms
+
+## A. FCFS (First-Come First-Served)
+
+> 비선점형 스케줄링
+
+- 효율적이지는 않음.
+	- CPU를 오래 사용하는 작업이 나타나면, CPU를 적게 사용하는 작업도 오래 기다려야하기 때문.
+- 앞에 진행중인 프로세스 시간에 따라 기다리는 시간에 상당한 영향을 줌.
+
+```ad-example
+
+은행 번호표, 화장실
+
+```
+
+| Process | Burst Time |
+| ------- | ---------- |
+| P1      | 24         |
+| P2      | 3          |
+| P3      | 3          |
+
+프로세스의 도착 순서 P1, P2, P3
+
+스케줄 순서를 Gantt Chart로 나타내면 다음과 같다.
+
+![](/bin/OS_image/os_5_3.png)
+
+- Waiting time for
+	- P1 = 0, P2 = 24, P3 = 27
+- Average waiting time
+	- (0 + 24 + 27) / 3 = 17
+
+---
+
+| Process | Burst Time |
+| ------- | ---------- |
+| P1      | 24         |
+| P2      | 3          |
+| P3      | 3          |
+
+프로세스의 도착 순서 P2, P3, P1
+
+스케줄 순서를 Gantt Chart로 나타내면 다음과 같다.
+
+![](/bin/OS_image/os_5_4.png)
+
+- Waiting time for
+	- P1 = 6, P2 = 0, P3 = 3
+- Average waiting time
+	- (6 + 0 + 3) / 3 = 3
+
+```
+
+- Much better than previous case.
+- Convoy effect : short process behind long process
+	- 콘보이 효과 : 긴 프로세스가 하나 도착해서, 짧은 프로세스들이 지나치게 오래 기다려야하는 현상
+
+```
+
+## B. SJF (Shortest-Job-First) / SRTF (Shortest-Remaining-Time-First)
+
+- 각 프로세스의 다음번 CPU burst time을 가지고 스케줄링에 활용
+- CPU burst time이 가장 짧은 프로세스를 제일 먼저 스케줄
+- Two schemes:
+	- Nonpreemptive
+		- 일단 CPU를 잡으면 이번 CPU burst가 완료될 때까지 CPU를 선점(preemption) 당하지 않음
+	- Preemptive
+		- 현재 수행중인 프로세스의 남은 burst time보다 더 짧은 CPU burst time을 가지는 새로운 프로세스가 도착하면 CPU를 빼앗김
+		- 이 방법을 Shortest-Remaining-Time-First (SRTF)이라고도 부른다.
+- SJF is optimal
+	- 주어진 프로세스들에 대해 minimum average waiting time을 보장
+		- preemptive 버전이 average waiting time을 최소화함
+
+> 평균 대기 시간을 최소화하는 스케줄링 알고리즘
+
+- 문제점
+	- Starvation(기아 현상)가 발생할 수 있음.
+		- SJF는 CPU 사용량이 극단적으로 짧은 job을 선호한다. CPU 사용량이 긴 프로세스는 영원히 서비스를 못받을 수도 있다.
+	- CPU 사용 시간을 미리 알 수 없다.
+		- 과거에 CPU를 사용한 흔적으로 추정할 수는 있다.
+
+| Process | Arrival Time | Burst Time |
+| ------- | ------------ | ---------- |
+| P1      | 0.0          | 7          |
+| P2      | 2.0          | 4          |
+| P3      | 4.0          | 1          |
+| P4      | 5.0          | 4          |
+
+### a. SJF (non-preemptive)
+
+> CPU 스케줄링은 어제 이루어지는가?
+> > CPU를 다 사용하고 나가는 시점에 CPU를 스케줄링할지, 안할지를 결정한다.
+
+![](/bin/OS_image/os_5_5.png)
+
+- Average waiting time
+	- (0 + 6 + 3 + 7) / 4 = 4
+
+### b. SRTF (preemptive)
+
+> CPU 스케줄링은 어제 이루어지는가?
+> > 새로운 프로세스가 도착하면(지금 작업중인 프로세스보다 burst time이 작다면) 스케줄링이 이루어진다.
+
+![](/bin/OS_image/os_5_6.png)
+
+- Average waiting time
+	- (9 + 1 + 0 + 2) / 4 = 3
+
+### c. 다음 CPU Burst Time의 예측
+
+- 다음번 CPU burst time을 어떻게 알 수 있는가?
+	- input data, branch, user ...
+- 추정(estimate)만이 가능하다.
+- 과거의 CPU burst time을 이용해서 추정
+	- (exponential averaging)
+
+	1. $t_n$ = actual lenght of $n^{th}$CPU burst
+	2. $\tau_{n+1}$ = predicted value for the next CPU burst
+	3. $\alpha$, 0 <= $\alpha$ <= 1
+	4. Define : $\tau_{n+1}$ = $\alpha t_{n}$ + (1-$\alpha$)$\tau_{n}$
+
+		```ad-note
+
+		t = 실제 CPU 사용 시간
+		$\tau$ = CPU 사용을 예측한 시간
+		
+		$t_n$ = n번째 실제 CPU 사용 시간
+		$\tau_{n+1}$ = n+1번째 CPU 사용을 예측한 시간	
+
+
+		$\tau_{n+1}$ = $\alpha t_{n}$ + (1-$\alpha$)$\tau_{n}$
+		=> n+1번째 CPU 사용 예측 시간은, n번째 실제 CPU 사용 시간과 n번째 예측했던 CPU 사용 시간을 일정 비율씩 곱해서 더한다.
+		
+		$\alpha$ = 일정 비율, ==> $\alpha$ + 1 - $\alpha$ = 1
+		
+		```
+
+		```ad-note
+
+		위 점화식을 푸는 방법
+		
+		- $\alpha$ = 0
+			- $\tau_{n+1}$ = $\tau_{n}$
+			- Recent history does not count
+		- $\alpha$ = 1
+			- $\tau_{n+1}$ = $t_{n}$
+			- Only the actual last CPU burst counts
+		- 식을 풀면 다음과 같다.
+			- $\tau_{n+1}$ = $\alpha t_{n}$ + (1 - $\alpha$)$\alpha t_{n-1}$ + ... + $(1-\alpha)^j \alpha t_{n-j}$ + ... + $(1 - \alpha)^{n+1}\tau_{0}$
+
+		```
+
+- 미래를 예측하려고하는데, 과거에 똑같은 behavior가 있으면, 그것을 통해서 미래를 예측하는데 과거를 어떤 비율로 반영할 것인가.
+	- 최근 것을 더 많이 반영하고, 과거 것을 적게 반영하는 방법이 exponential averaging
+
+## C. Priority Scheduling
+
+> 우선순위 스케줄링으로 우선순위가 제일 높은 프로세스에게 CPU를 할당하겠다.
+
+- A priority number (integer) is associated with each process
+- highest priority를 가진 프로세스에게 CPU 할당 (smallest integer = highest priority)
+	- preemptive
+		- 우선순위가 제일 높은 프로세스에게 CPU를 할당했는데, 우선순위가 더 높은 프로세스가 등장했을 때, CPU를 빼앗을 수 있는가.
+	- nonpreemptive
+		- 한 번 CPU를 할당하면, 더 높은 우선순위를 가지는 프로세스가 등장해도, CPU를 다 사용할 때까지는 빼앗을 수 없는 것.
+- SJF는 일종의 priority scheduling이다. (priority = predicted next CPU burst time)
+- Problem
+	- Starvation (기아 현상)
+		- low priority processes may **never execute**
+		- 우선순위가 낮은 프로세스가 지나치게 오래 기다려서, 경우에 따라서는 영원히 실행되지 못하는 상황
+	- Solution
+		- Aging (노화)
+			- as time progresses **increase the priority** of the process
+			- 오래 기다리면, 우선순위를 조금씩 높여주자는 것.
+
+## D. RR (Round Robin)
+
+> 응답시간(Response time)이 빨라진다.
+
+- 각 프로세스는 동일한 크기의 할당 시간(**time quantum**)을 가짐 (일반적으로 10-100 milliseconds)
+- 할당 시간이 지나면 프로세스는 선점(preempted)당하고 ready queue의 제일 뒤에 가서 다시 줄을 선다.
+- n개의 프로세스가 ready queue에 있고 할당 시간이 **q time unit**인 경우 각 프로세스는 최대 q time unit 단위로 CPU 시간의 1/n을 얻는다.
+	- **어떤 프로세스도 (n-1) * (q time unit)  이상 기다리지 않는다.**
+- Performance
+	- q large
+		- FCFS
+	- q small
+		- context switch 오버헤드가 커진다.
+	- 따라서, 적당한 규모의 time quantum을 주는 것이 바람직하고, 보통은 10~100 millisecond임
+
+| Process | Burst Time |
+| ------- | ---------- |
+| P1      | 53         |
+| P2      | 17         |
+| P3      | 68         |
+| P4      | 24         |
+
+Time Quantum = 20
+
+![](/bin/OS_image/os_5_7.png)
+
+- 일반적으로 SJF보다 average turnaround time이 길지만 response time은 더 짧다.
+	- 거의 모든 프로세스들이 마지막까지 CPU를 조금씩 서비스받으면서 waiting time이 굉장히 길어지기 때문에 안좋을 수 있다.
+
+### a. Turnaround Times Varies With Time Quantum
+
+![](/bin/OS_image/os_5_8.png)
+
+
+
+## E. Multilevel Queue
+
+## F. Multilevel Feedback Queue
+
+
+# 6. Scheduling Criteria
+
+> Performance Index (=Performance Measure, 성능 척도)
+
+## A. 시스템 입장에서의 성능 척도
+
+- CPU utilization (이용률)
+	- keep the CPU as busy as possible
+	- CPU는 가능한 바쁘게 일을 시켜라.
+- Throughput (처리량)
+	- # of processed that complete their execution per time unit
+	- 주어진 시간에 몇 개의 작업을 완료했는가를 나타냄.
+
+## B. 프로그램 입장에서의 성능 척도
+
+- Turnaround time (소요시간, 반환시간)
+	- amount of time to execute a particular process
+	- CPU를 쓰러 들어와서, 나갈때까지 걸린 시간.
+- Waiting time (대기 시간)
+	- amount of time a process has been waiting in the ready queue
+	- ready queue에 줄서서 기다린 시간의 합.
+- Response time (응답 시간)
+	- amount of time it takes from when a request was submitted until the first response is produced, not output (for time-sharing environment)
+	- 요청이 제출된 시점부터 첫 번째 응답이 생성될 때까지 걸리는 시간.
+
+
 # 참고자료
 
 [1] 반효경, [Process Management 1](javascript:void(0);). kocw. [운영체제 - 이화여자대학교 | KOCW 공개 강의](http://www.kocw.net/home/cview.do?cid=3646706b4347ef09). (accessed Nov 25, 2021)
