@@ -17,3 +17,7 @@
 # 5. CPU Scheduling 1
 
 [[CPU Scheduling]](https://github.com/mildsalmon/Study/blob/master/Operating%20Systems/CPU%20Scheduling.md)
+
+# 6. Process Synchronization
+
+[[Process Synchronization]]
