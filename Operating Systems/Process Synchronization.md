@@ -600,6 +600,402 @@ indefinite blocking.
 
 		5명이 동시에 왼쪽 젓가락을 집으면, 오른쪽 젓가락을 상대방이 쥐고 있기 때문에 영원히 먹지 못한다.
 
+# 8. Classical Problems of Synchronization
+
+- Bounded-Buffer Problem (Producer-Consumer Problem)
+- Readers and Writers Problem
+- Dining-Philosophers Problem
+
+## A. Bounded-Buffer Problem (Producer-Consumer Problem)
+
+> 생산자-소비자 문제
+
+![](/bin/OS_image/os_6_14.png)
+
+ - Producer(생산자) 프로세스와 Consumer(소비자) 프로세스가 각각 여러개 있다.
+	 - Producer
+		 - 공유 버퍼에 데이터를 하나 만들어서 집어 넣는 역할을 한다.
+		 - 생산자에게 자원이란? 비어있는 버퍼의 개수가 카운팅해야하는 자원.
+			 - 비어있는 버퍼가 없다면, 비어있는 버퍼가 생길때까지 대기해야한다.
+	 - Consumer
+		 - 공유 버퍼에서 데이터를 꺼내가는 역할을 한다.
+		 - 소비자에게 자원이란? 내용이 들어있는 버퍼의 개수가 카운팅해야하는 자원.
+			 - 차있는 버퍼가 없다면, 생산자가 버퍼를 채울때까지 기다려야함.
+
+### a. 발생 가능한 문제
+
+#### 1) 공유 버퍼에 lock을 걸었다가 푸는 방법
+
+1. 생산자 2명이 동시에 공유 버퍼에 접근해서 동일한 위치를 수정하는 경우
+	- 생산자가 데이터를 집어넣는 경우 공유 버퍼에 lock을 걸어서 다른 프로세스들의 접근을 막고 데이터를 집어넣는다. 그리고 작업이 끝났으면 lock을 푼다.
+2. 소비자 2명이 동시에 공유 버퍼에 접근해서 동일한 위치에서 꺼내가는 경우
+	- 소비자가 데이터를 꺼내가는 경우, 공유 버퍼에 lock을 걸어서 데이터를 꺼내가고, lock을 푼다.
+
+ #### 2) 버퍼가 유한하기 때문에 생기는 문제
+ 
+ 생산자들이 한꺼번에 도착해서 공유 버퍼를 가득 채웠다. 그런데 소비자는 안오고 생산자가 도착해서 데이터를 집어넣으려고 한다.
+ 
+ 이 경우, 마지막에 도착한 생산자는 사용할 수 있는 자원이 없다고 생각한다.
+
+### b. Shared data
+
+- buffer 자체 및 buffer 조작 변수 (empty/full buffer의 시작 위치)
+- 공유 버퍼 자체가 공유 데이터가 된다.
+- lock을 걸고 푸는 용도로 semaphore 변수가 사용된다.
+
+### c. Synchronization variables
+
+> 생산자-소비자 문제에서는 세마포어를 이용해서 해결해야하는 문제가 크게 2가지 있다.
+
+1. 둘이 동시에 공유 버퍼에 접근하는 것을 막기 위해서, 공유 버퍼 전체에 lock을 걸어서 나 혼자 접근할 수 있게하고, 접근이 끝났으면 lock을 풀어준다.
+2. 버퍼가 가득 차거나, 버퍼가 비었을때, 생산자나 소비자가 내용을 만들 수 있는 버퍼가 있고, 만들 수 없는 버퍼가 있다. 이때, 가용자원의 개수를 세는 세마포어
+
+- mutual exclusion
+	- Need binary semaphore
+	- (shared data의 mutual exclusion을 위해)
+- resource count
+	- Need integer semaphore
+	- (남은 full/empty buffer의 수 표시)
+	- 자원의 개수를 파악하기 위해 semaphore 변수가 필요하다.
+
+### d. semaphore를 이용하여 표현
+
+```
+Synchronization variables
+
+semaphore full = 0, empty = n, mutex = 1;
+```
+
+- mutex
+	- lock을 걸기 위한 변수
+- full
+	- 내용이 들어있는 버퍼를 세기 위한 변수
+	- 소비자 입장에서의 자원
+- empty
+	- 내용이 없는 버퍼를 세기 위한 변수
+	- 생산자 입장에서의 자원
+
+```c
+Producer
+
+do {...
+	produce an item in x
+	...
+	P(empty);
+	P(mutex);
+	...
+	add x to buffer
+	...
+	V(mutex);
+	V(full);
+} while(1);
+```
+
+```c
+Consumer
+
+do{...
+	P(full)
+	P(mutex);
+	...
+	remove an item from buffer to y
+	...
+	V(mutex);
+	V(empty);
+	...
+	consume the item in y
+	...
+} while(1);
+```
+
+## B. Readers-Writers Problem
+
+- Reader 프로세스와 Writer 프로세스가 있다. 그리고 공유 데이터도 있다.
+- 한 process가 DB에 write 중일 때 다른 process가 접근하면 안됨
+- read는 동시에 여럿이 해도 됨
+	- 한 프로세스가 read할 때 lock을 걸면, 다른 프로세스들은 읽지 못하는 비효율이 발생함.
+- solution
+	- Writer가 DB에 접근 허가를 아직 얻지 못한 상태에서는 모든 대기중인 Reader들을 다 DB에 접근하게 해준다.
+	- Writer는 대기 중인 Reader가 하나도 없을 때 DB 접근이 허용된다.
+	- 일단 Writer가 DB에 접근 중이면 Reader들은 접근이 금지된다.
+	- Writer가 DB에서 빠져나가야만 Reader의 접근이 허용된다.
+
+### a. Shared data
+
+- DB 자체
+- readcount;
+	- 현재 DB에 접근 중인 Reader의 수
+
+### b. synchronization variables
+
+- mutex
+	- 공유 변수 readcount를 접근하는 코드(critical section)의 mutual exclusion 보장을 위해 사용
+- db
+	- Reader와 writer가 공유 DB 자체를 올바르게 접근하게 하는 역할
+
+### c. 예시
+
+```c
+Shared data
+
+int readcount=0; // reader가 몇 명이 읽고있는지 나타내는 변수
+DB 자체;
+
+Synchronization variables
+semaphore mutex = 1, db = 1;
+```
+
+DB가 공유 데이터이고, 접근하기 위해서는 lock을 걸어야 한다.
+DB에 대한 lock에 해당하는 semaphore 변수가 db이다.
+
+```c
+Writer
+
+P(db);
+...
+writing DB is performed
+...
+V(db);
+```
+
+```c
+Reader
+
+P(mutex);
+readcount++;
+if(readcount == 1)
+	P(db); // block writer
+V(mutex); // readers follow
+...
+reading DB is performed
+...
+P(mutex);
+readcount--;
+if(readcount == 0)
+	V(db); // enable writer
+V(mutex);
+```
+
+어차피 db에 lock은 걸어야한다. lock이 걸려있지 않으면, writer가 와서 DB를 써버릴 수 있기 때문.
+
+readcount를 변경할 때, 여러 프로세스가 동시에 접근하면 값의 누락이 발생할 수 있다. 그래서 readcount를 변경할 때, 공유변수에 대한 lock을 걸어준다. 
+
+#### 1) startvation 발생 가능
+
+Reader가 읽고 있을 때, Writer가 오면, Writer는 reader가 끝날때까지 기다린다. 그런데, reader가 끝나기 직전에 reader가 100개가 들어오면 Writer는 또 다시 기다린다. 이게 반복되면, startvation 문제가 발생할 수 있다.
+
+##### ㄱ) 해결 방안
+
+- 큐에 우선순위를 두고, 지나치게 늦게 들어온 reader는 대기하고 reader에 대한 lock을 풀고 writer를 처리하고 reader를 다시 처리한다.
+
+## C. Dining-Philosophers Problem
+
+![](/bin/OS_image/os_6_13.png)
+
+```c
+Synchronization variables
+
+semaphore chopstick[5];
+// Initially all values are 1
+```
+
+```c
+Philosopher i
+
+do{
+	P(chopstick[i]);
+	P(chopstick[(i+1) % 5]);
+	...
+	eat();
+	...
+	V(chopstick[i]);
+	V(chopstick[(i+1) % 5]);
+	...
+	think();
+	...
+}while (1);
+```
+
+5명의 철학자의 일은 밥을 먹거나, 생각하거나 중 한 개
+
+- 밥을 먹기 위해서는
+	- 왼쪽, 오른쪽 젓가락을 잡아야함
+
+### a. deadlock 문제
+
+- Deadlock 가능성이 있다.
+	- 모든 철학자가 동시에 배가 고파져 왼쪽 젓가락을 집어버린 경우
+
+#### 1) 해결 방안
+
+- 4명의 철학자만이 테이블에 동시에 앉을 수 있도록 한다.
+- 젓가락을 두 개 모두 집을 수 있을 때에만 젓가락을 집을 수 있게 한다.
+- 비대칭
+	- 짝수(홀수) 철학자는 왼쪽(오른쪽) 젓가락부터 집도록 한다.
+
+> 젓가락을 두 개 모두 집을 수 있을 때에만 젓가락을 집을 수 있게 한다.
+
+```c
+enum {thinking, hungry, eating} state[5];
+semaphore self[5]=0; // 1인 경우 두 개의 젓가락을 집을 수 있는 경우.
+semaphore mutex=1; // 옆에 있는 철학자에 대한 상태(공유변수)를 변경할 수 있기 때문에 lock을 걸어준다.
+```
+
+```c
+Philosopher i
+
+do{
+	pickup(i);
+	eat();
+	putdown();
+	think();
+}while(1);
+
+// 젓가락을 내려놓을 때, 인접 철학자들의 젓가락 잡을 권한을 준다.
+void putdown(int i){
+	P(mutex);
+	state[i] = thinking;
+	test((i+4) % 5);
+	test((i+1) % 5);
+	V(mutex);
+}
+
+void pickup(int i){
+	P(mutex);
+	state[i] = hungry;
+	test(i);
+	V(mutex);
+	P(self[i]); // 젓가락 잡을 권한이 1이면, 0으로 바꾸고 밥먹으러 간다. 0이면, 젓가락 잡을 권한이 1이 될때까지 기다린다.
+}
+
+// 양 옆 철학자들이 밥을 먹지 않고, 내가 배가 고프면, 나에게 젓가락 2개를 잡을 수 있는 권한을 준다.
+void test(int i){
+	if(state[(i+4)%5] != eating && state[i] == hungry && state[(i+1) % 5] != eating){
+		state[i] = eating;
+		V(self[i]);
+	}
+}
+
+```
+
+다른 semaphore와는 다르게, 공유변수(자원)의 초기값을 0으로 주고, 조건을 만족하면 V연산을 통해 자원을 증가시켜준다.
+
+=> semaphore의 철학에는 잘 맞지 않는다.
+
+# 9. Monitor
+
+- Semaphore의 문제점
+	- 코딩하기 힘들다
+	- 정확성(correctness)의 입증이 어렵다.
+	- 자발적 협력(voluntary cooperation)이 필요하다.
+	- 한 번의 실수가 모든 시스템에 치명적 영향
+
+## A. 예시
+
+```c
+V(mutex)
+Critical Section
+P(mutex)
+```
+
+Mutual exclusion 깨짐
+
+```c
+P(mutex)
+Critical Section
+P(mutex)
+```
+
+Deadlock
+
+## B. Monitor
+
+- 동시 수행중인 프로세스 사이에서 abstract data type의 안전한 공유를 보장하기 위한 high-level synchronization construct
+- 프로그래밍 언어 차원에서 synchronization 문제를 해결하는 방법	
+	- 객체지향 프로그래밍에서 객체를 기반으로 프로그래밍 되는 것처럼.
+- 공유 데이터를 접근하기 위해서는 모니터라고 정의된 내부의 프로시저를 통해서만 접근할 수 있다.
+
+```c
+monitor monitor-name
+{
+	shared vaiable declarations // 모니터 내부에 공유 데이터에 대한 선언을 함.
+	procedure body P1(...){	// 공유 데이터를 접근하기 위한 프로시저들은 모니터 내부 함수로 구현한다.
+		...
+	}
+	procedure body P2(...){
+		...
+	}
+	procedure body Pn(...){
+		...
+	}
+	{
+		initialization code
+	}
+}
+```
+
+![](/bin/OS_image/os_6_15.png)
+
+- 모니터 안에 공유데이터와 공유데이터에 접근할 수 있는 프로시저를 정의한다.
+- 특정 공유 데이터에 접근하기 위해서는 특정 프로시저를 통해서만 접근할 수 있게 하는 것
+- 모니터는 원천적으로 모니터 내부에 있는 프로시저는 동시에 여러개가 실행이 안되도록 통제를 하는 권한을 준다.
+	- 이렇게하면, 프로그래머 입장에서는 **lock을 걸 필요가 없다**.
+		- semaphore는 동시접근을 막기 위해서 항상 P연산으로 lock을 걸고 나서, 일을하고, V연산으로 lock을 푸는 작업을 프로그래머가 해야한다.
+	- 모니터는 기본적으로 모니터에 대한 동시접근을 허락하지 않는다.
+		- 프로그래머가 lock을 걸 필요가 없이, 그냥 모니터에 있는 공유데이터를 프로시저를 이용해서 접근하면 된다.
+		- 그럼, 하나의 프로세스만 모니터를 접근할 수 있게하고, 나머지 프로세스들은 entry queue에 줄서서 기다린다.
+
+### a. 설명
+
+> 자원이 있으면 진행하고, 자원이 없으면 기다리게 하는 것은 모니터에도 필요함. (lock을 걸지 않을뿐.)
+> 이것과 비슷한 역할을 해주는 `condition variable`이 있다.
+
+- 모니터 내에서는 한번에 하나의 프로세스만이 활동 가능
+- 프로그래머가 동기화 제약 조건을 명시적으로 코딩할 필요없음.
+- 프로세스가 모니터 안에서 기다릴 수 있도록 하기 위해 **condition variable** 사용
+	- `condition x, y;`
+- Condition variable은 **wait**와 **signal** 연산에 의해서만 접근 가능
+	- `x.wait();`
+		- x.wait()을 invoke한 프로세스는 다른 프로세스가 x.signal()을 invoke하기 전까지 suspend된다.
+	- `x.signal();`
+		- x.signal()은 정확하게 하나의 suspend된 프로세스를 resume한다.
+		- suspend된 프로세스가 없으면 아무 일도 일어나지 않는다.
+
+### b. Bounded-Buffer Problem
+
+```c
+monitor bounded_buffer
+{
+	int buffer[N]; // 공유 버퍼가 모니터 안에 정의되어 있기 때문에, lock을 걸 필요가 없다.
+	condition full, empty;
+	// condition var은 값을 가지지 않고 자신의 큐에 프로세스를 매달아서 sleep시키거나, 큐에서 프로세스를 깨우는 역할만 함
+	
+	void produce(int x)	// 생산자 입장에서는 비어있는 버퍼(empty)가 필요하다.
+	{
+		if there is no empty buffer	// 빈 버퍼가 없다면,
+			empty.wait();	// 비어있는 버퍼를 기다리는 줄에 줄서서 기다림(blocked상태로 보냄)
+		add x to an empty buffer	// 빈 버퍼가 있다면, 버퍼에 내용을 집어넣어준다.
+		full.signal(); // 내용이 들어있는 버퍼가 없어서 잠들어있는(wait) consume이 있다면, 깨워줌
+	}
+	
+	void consume(int *x) 
+	{
+		if there is no full buffer // 내용이 들어있는 버퍼가 없으면 기다려야함.
+			full.wait();	// 내용이 들어있는 버퍼를 기다리는 줄에 줄서서 sleep한다.
+		remove an item from buffer and store it to *x // 내용이 들어있는 버퍼가 있다면, 하나 꺼냄.
+		empty.signal(); // 비어있는 버퍼를 기다리는 produce가 있다면, 깨워줌
+	}
+}
+```
+
+- 프로그래머 입장에서 세마포어보다 더 이해하기 쉽다.
+- lock을 걸 필요가 없다.
+- 모니터 안에서 하나의 프로세스만 활성화되기 때문에 나머지 프로세스는 줄서서 기다려야한다.
+- 모니터 안에서 공유자원의 개수가 없어서 기다려야한다면, 내부 queue에 sleep 상태로 기다린다.
+	- `signal()`연산
+- 모니터에서는 변수가, queue에 줄세우고 queue에 있는 것을 하나 깨워주는 역할을 함.
+
+
 # 참고자료
 
 [1] 반효경, [이화여자대학교 :: CORE Campus (ewha.ac.kr)](https://core.ewha.ac.kr/publicview/C0101020140328151311578473?vmode=f). kocw. [운영체제 - 이화여자대학교 | KOCW 공개 강의](http://www.kocw.net/home/cview.do?cid=3646706b4347ef09). (accessed Nov 25, 2021)
