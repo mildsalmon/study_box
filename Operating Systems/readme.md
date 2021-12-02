@@ -24,4 +24,4 @@
 
 # 7. Deadlocks
 
-[[Deadlocks]]
+[[Deadlocks]](https://github.com/mildsalmon/Study/blob/OS/Operating%20Systems/Deadlocks.md)
