@@ -161,6 +161,7 @@ P1 프로세스가 critical section에 들어가 있으면(공유 데이터를 �
 ## C. Bounded Waiting
 
 - 프로세스가 critical section에 들어가려고 요청한 후부터 그 요청이 허용될 때까지 다른 프로세스들이 critical section에 들어가는 횟수에 한계가 있어야 한다.
+- 기아 현상 방지
 
 
 ```ad-note
@@ -961,6 +962,13 @@ monitor monitor-name
 		- x.signal()은 정확하게 하나의 suspend된 프로세스를 resume한다.
 		- suspend된 프로세스가 없으면 아무 일도 일어나지 않는다.
 
+#### 1) semaphore와 monitor의 목적 차이
+
+- monitor
+	- 동시접근을 막는 것을 모니터 차원에서 지원해준다.
+- semaphore
+	- 자원을 획득하기 위해서 프로그래머가 P연산(획득)과 V연산(반납)을 해줘야한다.
+
 ### b. Bounded-Buffer Problem
 
 ```c
@@ -995,7 +1003,52 @@ monitor bounded_buffer
 	- `signal()`연산
 - 모니터에서는 변수가, queue에 줄세우고 queue에 있는 것을 하나 깨워주는 역할을 함.
 
+### c. Dining Philosophers Example
+
+```c
+
+monitor dining_philosopher
+{
+	enum {thinking, hungry, eating} state[5];
+	condition self[5];
+	
+	void pickup(int i){
+		state[i] = hungry;
+		test(i);
+		if (state[i] != eating)
+			self[i].wait(); // wait here
+	}
+	
+	void putdown(int i){
+		state[i] = thinking;
+		// test left and right neighbors
+		test((i+4) % 5); // if L is wating
+		test((i+1) % 5);
+	}
+	
+	void test(int i){
+		if((state[(i+4) % 5] != eating) && (state[i] == hungry) && (state[(i+1) % 5] != eating)){
+			state[i] = eating;
+			self[i].signal(); // wake up Pi
+		}
+	}
+	
+	void init(){
+		for(int i=0; i<5; i++)
+			state[i] = thinking;
+	}
+}
+
+Each Philosopher:
+{
+	pickup(i);	// -> Enter monitor
+	eat();
+	putdown(i);	// -> Enter monitor
+	think();
+}while(1)
+
+```
 
 # 참고자료
 
-[1] 반효경, [이화여자대학교 :: CORE Campus (ewha.ac.kr)](https://core.ewha.ac.kr/publicview/C0101020140328151311578473?vmode=f). kocw. [운영체제 - 이화여자대학교 | KOCW 공개 강의](http://www.kocw.net/home/cview.do?cid=3646706b4347ef09). (accessed Nov 25, 2021)
+[1] 반효경, [이화여자대학교 :: CORE Campus (ewha.ac.kr)](https://core.ewha.ac.kr/publicview/C0101020140328151311578473?vmode=f). kocw. [운영체제 - 이화여자대학교 | KOCW 공개 강의](http://www.kocw.net/home/cview.do?cid=3646706b4347ef09).  (accessed Dec 1, 2021)
