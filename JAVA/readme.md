@@ -16,4 +16,4 @@
 
 # 5. 배열
 
-[[배열 (Array)]]
+[[배열 (Array)]](https://github.com/mildsalmon/Study/blob/master/JAVA/%EB%B0%B0%EC%97%B4%20(Array).md)
