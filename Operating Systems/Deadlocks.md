@@ -148,6 +148,8 @@ I/O device, CPU cycle, memory space, semaphore 등
 
 > 최악의 상황을 가정한다.
 
+> Deadlock이 발생하지 않을 게 확실한 경우에만 요청을 받아들여서 자원을 할당한다.
+
 - safe state
 	- 시스템 내의 프로세스들에 대한 **safe sequence**가 존재하는 상태
 
@@ -216,7 +218,74 @@ I/O device, CPU cycle, memory space, semaphore 등
 
 ### c. Deadlock Detection and recovery
 
+> 갑자기 시스템이 느려지면 deadlock detection을 하고 혹시 deadlock이 발견되면 recovery를 한다.
+
 - Deadlock 발생은 허용하되 그에 대한 detection 루틴을 두어 deadlock발견시 recover
+
+#### 1) Deadlock Detection
+
+- Resource type 당 single instance인 경우
+	- 자원할당 그래프에서의 cycle이 곧 deadlock을 의미
+	- Banker's Algorithm과 같이 그래프를 그려서하는게 더 좋다.
+- Resource type 당 multiple instance인 경우
+	- Banker's Algorithm과 유사한 방법 활용
+
+##### ㄱ) Wait-for graph 알고리즘
+
+- Resource type당 single instance인 경우
+- Wait-for graph
+	- 자원할당 그래프의 변형
+		- 자원할당 그래프에서 자원을 빼고 그림
+	- 프로세스만으로 node 구성
+	- Pj가 가지고 있는 자원을 Pk가 기다리는 경우 Pk -> Pj
+- algorithm
+	- Wait-for graph에 사이클이 존재하는지를 주기적으로 조사
+	- O($N^2$)
+		- 노드가 N개, 간선이 N-1개
+
+![[os_7_8.png]]
+
+자원의 최대 사용량을 미리 알릴 필요 없음 -> 그래프에 점선이 없음
+
+##### ㄴ) 테이블 그려서 하는 방법
+
+![[os_7_9.png]]
+
+프로세스가 요청하면 자원을 준다. 어떤 프로세스가 최대로 자원을 얼마나 요청할지 알필요는 없다.
+
+![[os_7_10.png]]
+
+> 이건 deadlock 존재
+
+###### ! deadlock이 있는지 찾아보는 방법
+
+1. 가용 자원(Available)이 몇개 있는지를 본다.
+2. 가용 자원으로 처리가능한 프로세스가 있는지를 본다.
+3. 현재 요청하지 않은 프로세스의 할당 자원(Allocation)은 전부 가용자원에 합한다.
+4. 그렇게 만들어진 가용자원을 가지고 처리 가능한 요청이 있는지 확인한다.
+5. 처리 가능한 요청이 있다면, 그 프로세스에 할당된 자원도 합쳐나가면서 deadlock이 발생하는지 확인한다.
+
+#### 2) Recovery
+
+##### ㄱ) Process termination
+
+> deadlock과 관련된 프로세스를 죽인다.(종료시킨다.)
+
+- Abort **all** deadlocked processes
+	- deadlock에 연류된 모든 프로세스를 죽인다.
+- Abort **one process at a time** until the deadlock cycle is eliminated
+	- deadlock에 연류된 프로세스를 하나씩 죽인다.
+
+
+##### ㄴ) Resource Preemption
+
+> deadlock에 연류된 프로세스로부터 자원을 뺏는다.
+
+- 비용을 최소화할 victim의 선정
+- safe state로 rollback하여 process를 restart
+- Starvation 문제
+	- 동일한 프로세스가 계속해서 victim으로 선정되는 경우
+	- cost factor에 rollback 횟수도 같이 고려
 
 ### d. Deadlock Ignorance
 
@@ -224,8 +293,12 @@ I/O device, CPU cycle, memory space, semaphore 등
 - UNIX를 포함한 대부분의 OS가 채택
 	- 운영체제가 느려지면, 사람이 알아서 프로세스를 죽여서 해결함.
 
+#### 1) Deadlock Ignorance
 
-
+- Deadlock이 일어나지 않는다고 생각하고 아무런 조치도 취하지 않는다.
+	- Deadlock이 매우 드물게 발생하므로 deadlock에 대한 조치 자체가 더 큰 overhead일 수 있음
+	- 만약, 시스템에 deadlock이 발생한 경우 시스템이 비정상적으로 작동하는 것을 사람이 느낀 후 직업 process를 죽이는 등의 방법으로 대처
+	- UNIX, Windows 등 대부분의 범용 OS가 채택
 
 # 참고자료
 
