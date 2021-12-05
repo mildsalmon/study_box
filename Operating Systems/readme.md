@@ -25,3 +25,7 @@
 # 7. Deadlocks
 
 [[Deadlocks]](https://github.com/mildsalmon/Study/blob/OS/Operating%20Systems/Deadlocks.md)
+
+# 8. Memory Management
+
+[[Memory Management]]
