@@ -28,4 +28,4 @@
 
 # 8. Memory Management
 
-[[Memory Management]]
+[[Memory Management]](https://github.com/mildsalmon/Study/blob/OS/Operating%20Systems/Memory%20Management.md)
