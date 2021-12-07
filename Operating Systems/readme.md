@@ -21,3 +21,11 @@
 # 6. Process Synchronization
 
 [[Process Synchronization]](https://github.com/mildsalmon/Study/blob/master/Operating%20Systems/Process%20Synchronization.md)
+
+# 7. Deadlocks
+
+[[Deadlocks]](https://github.com/mildsalmon/Study/blob/OS/Operating%20Systems/Deadlocks.md)
+
+# 8. Memory Management
+
+[[Memory Management]]
