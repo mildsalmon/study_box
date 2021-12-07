@@ -20,4 +20,4 @@
 
 # 6. 객체지향 프로그래밍 1
 
-[[객체지향 프로그래밍]]
+[[객체지향 프로그래밍]](https://github.com/mildsalmon/Study/blob/master/JAVA/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.md)
