@@ -698,6 +698,9 @@ Page table의 각 entry마다 아래의 bit를 둔다.
 
 > 프로그램을 구성하는 address space(주소공간)를 의미 단위로 쪼갠 것.
 
+> original segmentation을 쓰는 메모리 시스템은 현실적으론 없다.
+> > segmentation을 쓰더라도 내부에는 paging을 같이 써야만 관리가 수월한 방식이 된다.
+
 ---
 
 프로그램의 주소공간을 같은 크기로 자르는게 아니라, 어떤 의미있는 단위로 자르는 것
@@ -775,6 +778,12 @@ physical memory의 위에서부터 base위치만큼 떨어진 곳에서 segment�
 
 ![](/bin/OS_image/os_8_20.png)
 
+- 세그먼트 테이블
+	- base
+		- 물리적인 주소(Physical memory)의 시작 위치가 주어진다.
+	- limit
+		- 세그먼트의 길이도 주어진다.
+
 #### 4) Segmentation Architecture (Cont.)
 
 > segmentation은 의미 단위로 쪼개는 것이기 때문에 의미단위로 일하는 것은 segmentation이 효과적이다. 
@@ -789,12 +798,90 @@ physical memory의 위에서부터 base위치만큼 떨어진 곳에서 segment�
 	- shared segment
 	- same segment number
 	
-> segment는 의미 단위이기 때문에 공유(sharing)와 보안(protection)에 있어 paging보다 훨씬 효과적이다.
+> segment는 **의미 단위**이기 때문에 **공유(sharing)와 보안(protection)에 있어 paging보다 훨씬 효과적**이다.
+> > 메모리의 일부분을 공유하거나 메모리의 일부분에 대해서 읽기 혹은 쓰기 권한을 주는 등 동일한 크기 단위가 아닌 의미 단위로 하는 일에서는 segmentation이 유리하다.
 
 - Allocation
 	- first fit / best fit
 	- external fragmentation 발생
-	> segment의 길이가 동일하지 않으므로 가변분할 방식에서와 동일한 문제점들이 발생
+
+> segment의 길이가 동일하지 않으므로 가변분할 방식에서와 동일한 문제점들이 발생
+> > paging은 동일한 크기 단위로 자르기 때문에 중간중간에 물리적인 메모리의 조각이 발생할일이 없다.
+
+#### 5) Segmentation과 Paging의 비교
+
+- Paging
+	- 개수가 많다.
+	- 테이블을 위한 메모리 낭비가 심하다.
+- Segmentation
+	- 개수가 몇 개 없다.
+	- 테이블을 위한 메모리 낭비가 적다.
+
+#### 6) Sharing of Segments
+
+> 세그먼트를 서로다른 두 프로세스가 공유하는 모습
+
+![](/bin/OS_image/os_8_21.png)
+
+- 0번 segment
+	- 코드를 담고 있다.
+	- 두 프로세스에서 같은 역할을 하고 있기 때문에 sharing을 하고 있다.
+	- segment table을 통해 주소변환을 하면, 43062(base)에 위치하게 된다.
+
+Shared segment는 같은 논리상의 주소에 있어야 한다.
+
+### c. Segmentation with Paging (Paged Segmentation)
+
+> Segment를 여러개의 Page로 구성하는 기법
+> > Segment 하나가 여러 개의 Page로 구성된다.
+
+- pure segmentation과의 차이점
+	- **segment-table entry**가 segment의 **base address**를 가지고 있는 것이 아니라 segment를 구성하는 **page table**의 **base address**를 가지고 있음
+
+![](/bin/OS_image/os_8_22.png)
+
+Segment 하나가 여러 개의 Page로 구성되기 때문에, 먼저 Segment에 대한 주소 변환을 하게 된다.
+
+각 프로그램이 가지고 있는 논리 주소는 (세그먼트 번호, offset(세그먼트 안에서 얼마나 떨어져 있는지를 나타냄))로 구성되어 있다.
+
+1. segment table을 찾는다.
+	- STBR에 segment의 시작 위치가 들어 있고, 위에서부터 s번째 entry에 가면. 이 segment에 대한 주소 변환 정보가 있었다.
+2. segmentation에 대한 주소 변환을 해주면, 이 segment를 구성하는 page table의 시작 위치가 나온다.
+	- segment 하나가 여러 개의 page로 구성되면, 각각의 page별로 주소변환을 해야한다. 그렇기 때문에 segment 당 page table이 존재하는 것이다.
+
+---
+
+- logical address
+	- s
+		- segment가 몇 번째 위치에서 시작되는지를 나타냄
+	- d
+		- segment offset (세그먼트 안에서 얼마나 떨어져 있는가를 나타냄)
+		- segment 안에서 떨어진 offset의 길이가 segment의 길이 이내인 경우에 segment 안의 offset d를 아래처럼 자른다.
+
+		```ad-note
+
+		- p
+			- 페이지 번호
+		- d' (offset)
+			- 페이지 안에서 얼마나 떨어져 있는지를 나타냄
+
+		```
+
+page table의 시작 위치로부터 segment offset 안의 페이지 번호(p)만큼 떨어진 entry에 가면, 이 page에 대한 주소변환 결과 (physical memory의 몇 번째 frame인지 frame 번호가 나온다.)
+
+그 frame 번호를 앞에 붙이고, 페이지안에서의 offset을 뒤에 붙이면, physical memory의 주소가 된다.
+
+---
+
+#### 1) 장점
+
+- 물리적인 메모리에 올라갈때는 page단위로 쪼개져서 올라가기 때문에, Allocation 문제가 발생하지 않는다. (외부 단편화 문제)
+- 의미 단위로 해야하는 공유(sharing)나 보안(protection)같은 업무는 segment table level에서 한다.
+	- 특정 segment의 protection이 read-only인지, read/write가 가능한지는 segment table의 해당 segment마다 해주면 된다.
+
+---
+
+운영체제도 하나의 프로그램이기 때문에, CPU를 잡으면 인스트럭션을 실행하는 것은 다른 프로그램과 다르지 않다.
 
 # 참고자료
 
