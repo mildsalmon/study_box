@@ -32,4 +32,4 @@
 
 # 9. Virtual Memory
 
-[[Virtual Memory]]
+[[Virtual Memory]](https://github.com/mildsalmon/Study/blob/OS/Operating%20Systems/Virtual%20Memory.md)
