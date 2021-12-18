@@ -219,7 +219,7 @@ Page fault가 났을때 DISK를 접근하는 것은 대단히 오래걸리는 �
 
 ## A. Paging System에서 LRU, LFU 가능한가?
 
-![[os_9_15.png]]
+![](/bin/OS_image/os_9_15.png)
 
 일반적으로 Process A가 CPU 제어권을 가지고 있을때, Process A의 논리적 메모리(logical memory)에서 인스트럭션을 하나씩 읽어와서 실행한다. CPU에서 Process A의 논리적 주소를 주면 page table을 통해서 물리적 메모리 주소로 변환해서 물리적 메모리에 있는 내용을 CPU로 읽어들인다. 
  
@@ -255,7 +255,7 @@ page fault가 발생하면(CPU 제어권이 운영체제에 넘어오면), 운�
 - 한 바퀴 되돌아와서도 (=second chance) 0이면 그때에는 replace 당함
 - 자주 사용되는 페이지라면 second chance가 올 때 1
 
-![[os_9_16.png]]
+![](/bin/OS_image/os_9_16.png)
 
 각각의 사각형이 page frame (물리적인 메모리 안에 들어있는 페이지들)
 
@@ -353,7 +353,7 @@ modified bit이 0인 페이지만 교체한다면, 변경된 내용을 disk에 �
 - 대부분의 시간에 CPU는 한가함
 - low throughput
 
-![[os_9_17.png]]
+![](/bin/OS_image/os_9_17.png)
 
 x축은 지금 메모리에 올라와있는 프로그램의 개수
 
@@ -419,7 +419,7 @@ Multiprogramming Degree가 너무 높아지면(메모리에 너무 많은 프로
 		- Working set에 속한 page는 메모리에 유지, 속하지 않은 것은 버림
 			- (즉, 참조된 후 $\Delta$ 시간 동안 해당 page를 메모리에 유지한 후 버림)
 
-![[os_9_18.png]]
+![](/bin/OS_image/os_9_18.png)
 
 window를 10으로 하면, 현재 시점부터 과거 10번째 참조된 페이지까지는 이 프로그램의 Working set이기 때문에 메모리에 올려놔야 한다. 반복되는 페이지의 중복을 제거하면 {1, 2, 5, 6, 7}이 현재 시점에서 이 프로그램의 Working Set이기 때문에 Working Set 알고리즘은 이 프로그램에게 5개의 페이지 프레임을 줄 수 있으면 {1, 2, 5, 6, 7}을 메모리에 올려두고. 
 
@@ -459,7 +459,7 @@ window를 10으로 하면, 현재 시점부터 과거 10번째 참조된 페이�
 
 만약에 page fault rate가 빈번해서 메모리를 더 줘야하는데, 더 줄 메모리가 없다면 그 프로그램을 통째로 swap out 시켜서 메모리에 남아있는 프로그램이라도 page fault rate가 일정 수준 이하로 유지되도록 하여 thrashing을 방지한다.
 
-![[os_9_19.png]]
+![](/bin/OS_image/os_9_19.png)
 
 - page-fault rate의 상한값과 하한값을 둔다
 	- Page fault rate이 상한값을 넘으면 frame을 더 할당한다
