@@ -1,6 +1,6 @@
 # 1. 교착상태(deadlock)
 
-![[os_7_1.png]]
+![](/bin/OS_image/os_7_1.png)
 
 > 각자 일부 자원은 가지고 있으면서, 상대방이 가지고 있는 자원을 요구하고 있는데. 상대방도 자신이 가지고 있는 것을 내놓지 않고 상대방이 가진 것을 요구하는 것.
 
@@ -38,7 +38,7 @@ I/O device, CPU cycle, memory space, semaphore 등
 
 - Binary semaphore A and B
 
-![[os_7_2.png]]
+![](/bin/OS_image/os_7_2.png)
 
 ## B. Deadlock의 발생 4가지 조건
 
@@ -72,7 +72,7 @@ I/O device, CPU cycle, memory space, semaphore 등
 	- request edge Pi -> Rj
 	- assignment edge Rj -> Pi
 
-![[os_7_3.png]]
+![](/bin/OS_image/os_7_3.png)
 
 > cycle이 없으므로 deadlock이 아님.
 
@@ -83,7 +83,7 @@ I/O device, CPU cycle, memory space, semaphore 등
 - 자원 안의 점들
 	- 자원의 수(인스턴스)
 
-![[os_7_4.png]]
+![](/bin/OS_image/os_7_4.png)
 
 > 1번은 deadlock 
 > 2번은 deadlock 아님
@@ -164,7 +164,7 @@ I/O device, CPU cycle, memory space, semaphore 등
 - 시스템이 unsafe state에 있으면
 	- possibility of deadlock
 
-![[os_7_5.png]] 
+![](/bin/OS_image/os_7_5.png) 
 
 #### 1) Deadlock Avoidance
 
@@ -186,7 +186,7 @@ I/O device, CPU cycle, memory space, semaphore 등
 - request edge의 assignment edge 변경시 (점선을 포함하여) cycle이 생기지 않는 경우에만 요청 자원을 할당한다.
 - Cycle 생성 여부 조사시 프로세스의 수가 n일 때 O(n^2) 시간이 걸린다.
 
-![[os_7_6.png]]
+![](/bin/OS_image/os_7_6.png)
 
 - 프로세스 --점선--> 자원
 	- 이 프로세스가 평생에 적어도 한번은 이 자원을 사용할 일이 있다는 의미.
@@ -207,7 +207,7 @@ I/O device, CPU cycle, memory space, semaphore 등
 	- 할당받은 프로세스가 종료되면 모든 자원을 반납
 	- 모든 프로세스가 종료될 때까지 이러한 과정 반복
 
-![[os_7_7.png]]
+![](/bin/OS_image/os_7_7.png)
 
 - 전체 자원에서 allocation(할당)된 자원을 빼면 available한 자원들이 나온다.
 - Need 테이블
@@ -243,17 +243,17 @@ I/O device, CPU cycle, memory space, semaphore 등
 	- O($N^2$)
 		- 노드가 N개, 간선이 N-1개
 
-![[os_7_8.png]]
+![](/bin/OS_image/os_7_8.png)
 
 자원의 최대 사용량을 미리 알릴 필요 없음 -> 그래프에 점선이 없음
 
 ##### ㄴ) 테이블 그려서 하는 방법
 
-![[os_7_9.png]]
+![](/bin/OS_image/os_7_9.png)
 
 프로세스가 요청하면 자원을 준다. 어떤 프로세스가 최대로 자원을 얼마나 요청할지 알필요는 없다.
 
-![[os_7_10.png]]
+![](/bin/OS_image/os_7_10.png)
 
 > 이건 deadlock 존재
 
