@@ -40,4 +40,8 @@
 
 # 11. File System Implementation
 
-[[File System Implementation]]
+[[File System Implementation]](https://github.com/mildsalmon/Study/blob/master/Operating%20Systems/File%20System%20Implementation.md)
+
+# 12. Disk Management and Scheduling
+
+[[Disk Management and Scheduling]](https://github.com/mildsalmon/Study/blob/master/Operating%20Systems/Disk%20Management%20and%20Scheduling.md)
