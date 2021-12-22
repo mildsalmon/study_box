@@ -360,6 +360,8 @@ Virtual memory system 관점에서에서는 page cache라고 부름
 
 ## A. Page Cache
 
+> 페이지가 Swap Area에 내려가 있는가? Page Cache에 올라와 있는가?
+
 - Virtual memory의 paging system에서 사용하는 page frame을 caching의 관점에서 설명하는 용어
 	- 물리적 메모리에 올라가는 page frame을 page cache라고 한다.
 	- swap area보다 page frame이 빠르다.
@@ -375,10 +377,141 @@ Virtual memory system 관점에서에서는 page cache라고 부름
 ## B. Memory-Mapped I/O
 
 - File의 일부를 virtual memory에 mapping 시켜 놓고 사용함.
-	- mapping을 해놓고 나면, 그 다음부터는 read / write system call을 하는 것이 아니라 memory에 read/write하는 것처럼 하는데, 실제로는 file에 read/write하는 효과가 나게 하는 방법
+	- 프로세스의 주소 공간 중 일부를 파일에 mapping을 해둔다. 그 다음부터는 read / write system call을 하는 것이 아니라 memory에 read/write하는 것처럼 하는데, 실제로는 file에 read/write하는 효과가 나게 하는 방법
 - 매핑시킨 영역에 대한 메모리 접근 연산은 파일의 입출력을 수행하게 함
 
+---
+
+![](/bin/OS_image/os_11_16.png)
+
+### a. Unified Buffer Cache를 이용하지 않는 File I/O
+
+기존의 파일에 데이터를 읽고 쓰는 방법은 2가지 인터페이스가 있다.
+
+1. 파일을 open한 다음 read/write system call을 하는 것
+	- 그럼 system call에 따라 운영체제가 해당 파일의 내용이 buffer cache에 있는지를 확인한다.
+	- 있으면, 바로 전달
+	- 없으면, 디스크 file system에서 읽어와서 전달
+	> read/write system call이 발생하면 운영체제가 file system에 있는 내용을 자신의 buffer cache에 읽어온 후에 사용자 프로그램에 전달한다.
+	> 그럼, 사용자 프로그램은 자신의 주소영역에 있는 page에 buffer cache에 있는 내용을 copy해서 사용한다.
+2. memory-mapped I/O
+	- 처음에는 system call을 한다.
+		- 운영체제한테 memory-mapped I/O를 쓰겠다는 mmaped라는 system call을 해준다.
+	- 그럼, 자신의 주소공간 중 일부를 파일에 맵핑한다.
+		- 맵핑을 해도 disk에 있는 파일을 읽어오는 작업은 똑같다. (buffer cache에 읽어오는 것은 똑같다.)
+	- buffer cache에 읽어온 내용을 page cache에 copy한다.
+		- 그럼, page cache에 page 내용이 파일에 map된 내용이 된다.
+	- 이제부터는 사용자 프로그램이 자신의 page cache(mmap 된 영역)에 데이터를 메모리에 읽고 쓰듯이 요청을 하게되면 read/write가 된다.
+		- map된 내용이 내 주소영역에 올라와있으면 운영체제(커널)의 간섭없이 내 메모리 영역에 데이터를 읽고 쓰는(메모리 접근하는 방식)을 이용해서 파일입출력을 하게된다.
+	- 만약, map만 해두고 file의 내용을 page cache의 메모리로 안읽어왔다면, 해당 page에 접근하려할 때 page fault가 발생한다. (기존 가상메모리 관리하는 것과 동일함)
+	> 자신의 메모리에 접근하듯이 메모리 접근하는 방식을 통해서 I/O를 한다.
+
+---
+
+#### 1) Memory-mapped의 장점
+
+- Memory-mapped를 사용하는 이유 
+	- **이미 메모리에 올라온 내용에 대해서 커널(운영체제)의 도움을 받지 않고 자신의 메모리에 접근하듯이 read/write 할 수 있다.**
+		- 더 빠름
+
+#### 2)  단점
+
+- buffer cache 환경에서는 read/write system call을 사용하던 memory-mapped를 사용하던 파일 입출력을 할때는 buffer cache를 통과해야 한다.
+- buffer cache는 파일입출력을 위해 운영체제가 미리 할당해놓은 영역이고 그 곳을 항상 통과해야하기 때문에 read/write system call 또는 memory-mapped 모두 자신의 page cache에 복제를 해야하는 오버헤드가 발생한다.
+
+#### 3) 주의할 점
+
+memory mapped I/O를 사용하여 physical memory를 share하는 경우 일관성(consistency) 문제가 발생할 수 있음.
+
+프로세스 B가 바꾼 내용이 다른 프로세스한테 정확하게 전달되지 않는 문제.
+
+### b. Unified Buffer Cache를 이용하는 File I/O
+
+기존의 buffer cache처럼 운영체제가 공간을 따로 나눠놓지 않고 필요에 따라서 page cache에서 공간을 할당해서 사용한다.
+
+이런 경우에는 경로가 더 단순해진다.
+
+#### 1) read/write system call
+
+무조건 운영체제한테 system call을 해야한다.
+
+해당하는 내용이 disk file system에 있던 buffer cache에 있는 것과 상관없이 CPU 제어권이 운영체제한테 넘어간다.
+운영체제는 이미 메모리에 올라와있는 내용은 사용자 프로그램의 주소영역에 copy를 하면 된다.
+메모리에 올라와있지 않은 내용은 disk의 file system에서 읽어와서 사용자 프로그램에 copy를 해서 전달한다.
+
+#### 2) memory-mapped I/O
+
+처음에 운영체제한테 자신의 주소 영역 중의 일부를 file에 mapping을 하는 단계를 거치면.
+
+그 후부터는 사용자 프로그램의 주소 영역에 page cache가 매핑이 되는 것이다.
+따라서 buffer에 있는 내용을 copy해서 올라가는 것이 아닌, **page cache 자체가 사용자 프로세스에 논리적인 주소영역에 mapping**이 된다.
+
+즉, page cache에 직접 읽고 쓸 수 있다. (오버헤드가 발생하지 않는다.)
+
+---
+
+![](/bin/OS_image/os_11_17.png)
+
+1. 프로그램이 파일 시스템에  실행 파일 형태로 저장되어 있음.
+2. 실행 파일을 실행시키면 프로세스가 된다.
+	- 프로세스만의 독자적인 주소공간(Virtual Memory)가 만들어진다.
+3. 주소변환을 해주는 하드웨어를 통해서 당장 필요한 부분은 physical memory에 올라가게 된다.
+	- 물리적 메모리의 공간은 한정되어 있기 때문에, 쫒겨나는 것들은 disk의 Swap area로 넘어간다.
+
+단, code부분은 physical memory에 올라간 다음에 쫒겨날 때 swap area로 내려가지 않는다. code 부분은 read-only라서 이미 File system에 존재하는 실행 파일 형태로 코드가 저장되어 있음. 따라서 code의 일부가 physical memory에 올라갔다 쫒겨날때는 swap area에 써줄 필요가 없다.
+
+실행파일을 실행시킬 때, loader라는 소프트웨어가 code를 메모리에 올려놓을 때 memory-mapped I/O를 사용한다. code는 별도의 swap area를 가지지 않고 file system에 file 형태로 존재하는 내용이 프로세스 주소 영역에 매핑이 된 형태이다.
+
+![](/bin/OS_image/os_11_18.png)
+
+![](/bin/OS_image/os_11_19.png)
+
+프로그램(프로세스 B)이 실행이 되다가 File system의 데이터 파일을 memory-mapped I/O 형태로 쓰고 싶은 경우에는.
+
+프로그램(프로세스 B)이 운영체제한테 데이터 파일의 일부를 내 주소 일부에 mapping을 해주십쇼 라고 system call을 한다.
+ 
+![](/bin/OS_image/os_11_20.png)
+ 
+그럼, 운영체제가 데이터 파일의 일부를 프로그램(프로세스 B)의 주소 공간 일부에 mapping을 한다. 
+
+프로그램(프로세스 B)이 실행되면서 mapping된 메모리 위치로 접근했을때, 그 내용이 메모리에 안올라와 있으면 page fault가 발생한다. 
+
+CPU가 운영체제로 넘어가서 page fault가 발생한 page를 physical memory에 올려둔다. 
+
+그럼 이제부터 프로그램(프로세스 B)의 페이지(데이터 파일)가 physical memory의 페이지(데이터 파일)로 매핑이 된다.
+
+따라서 프로세스 B가 데이터 파일에 접근할 때는 OS의 도움을 받지 않고 그냥 데이터를 읽거나 쓸 수 있다. (자신의 주소 공간 중의 일부이기 때문에)
+
+나중에 데이터가 physical memory에서 쫒겨날때는 swap area에 내리는 것이 아니라, memory-mapped 파일이기  때문에 File System의 데이터 파일에 수정된 내용을 써주고 쫒아낸다(교체한다.).
+
+또한, 또다른 프로그램(프로세스 A)도 데이터 파일에 memory-mapped I/O를 호출할 수 있다. 
+
+이 경우에는 physical memory의 내용이 share가 된다. 즉, 프로세스 B와 프로세스 A의 주소공간에서 physical memory의 페이지 프레임(데이터 파일이 위치한)으로 매핑이 된다. 
+
+> memory mapped I/O를 하면 physical memory의 내용을 logical memory에 매핑을 하게 된다.
+
+---
+
+![](/bin/OS_image/os_11_21.png)
+
+만약, 똑같은 데이터 파일에 대해서 read/write system call을 해서 사용할 수도 있다.
+
+그런 경우에는 프로그램(프로세스 A)가 file system의 데이터 파일을 달라고 운영체제한테 system call을 한다. 
+
+운영체제는 자신의 buffer cache에 데이터 파일 내용을 읽어와야 한다. 
+
+unified buffer cache인 경우네는 physical memory가 page cache이자 buffer cache이다. 그리고 physical memory의 데이터 파일 내용은 프로그램(프로세스 B)와 memory-mapping이 되어 있다.
+
+![](/bin/OS_image/os_11_22.png)
+
+read system call을 했는데 프로그램(프로세스 A)가 요청한 데이터파일의 내용이 page cache(buffer cache)에 올라와 있다면, 그 내용을 copy해서 사용자 프로세스(프로세스 A)한테 전달을 해준다.
+
+> read/write system call을 해주면 physical memory(page cache)에 있는 내용을 copy해서 프로세스의 주소 공간에 전달한다.
+
+
 ## C. Buffer Cache
+
+> 파일 데이터가 파일 시스템(스토리지)에 저장되어 있는가? 운영체제의 buffer cache에 올라와 있는가?
 
 > 파일의 데이터를 사용자가 요청했을때, 운영체제가 읽어온 내용을 자기의 영역 중 일부에 저장하는 방법. 추후 똑같은 요청이 들어오면 logical disk에 가지 않고도 buffer cache에서 바로 읽어오는 것.
 
@@ -418,6 +551,19 @@ Virtual memory system 관점에서에서는 page cache라고 부름
 	- 가상메모리에서 사용
 	- 빠르게 데이터를 내려놓고 올려야하기 때문에 여러개의 block을 모아서 4KB 단위로 올리거나 내리는 방식을 사용한다.
 	- 속도 효율성을 위해서 여러개의 페이지를 한꺼번에 올리고 내리기도 한다.
+
+---
+
+미리 buffer cache와 page cache 공간 구분을 하지 않고 똑같이 페이지 단위로 관리를 하면서 필요할때 할당을 해서 사용한다.
+
+```ad-example
+
+파일 입출력을 위한 공간이 필요하다 -> page cache를 할당해서 buffer cache 용도로 쓴다. (file system)
+
+프로세스의 주소 공간 중에 페이지가 필요하다 -> page를 프로세스의 주소 공간으로 할당해서 프로세스에 해당 페이지를 올려서 사용한다. (swap area)
+
+```
+
 
 # 참고자료
 
