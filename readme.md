@@ -1,4 +1,4 @@
-# 1. 나만의 시스템
+# 🏋️‍♀️ 나만의 시스템
 
 보통 평일과 주말을 나눠서 공부합니다.
 
@@ -16,6 +16,6 @@
   - 인문 서적을 읽습니다.
   - 쉬거나 자소서를 작성합니다.
 
-# 2. 오늘의 기록 정리
+# 📃 오늘의 기록 정리
 
 공부한 내용은 따로 branch에 push해서 [Pull requests](https://github.com/mildsalmon/Study/pulls?q=is%3Apr+is%3Aclosed)로 매일을 정리합니다.
