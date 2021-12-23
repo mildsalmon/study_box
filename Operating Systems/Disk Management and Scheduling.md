@@ -245,6 +245,119 @@ starvation 문제도 발생하지 않는다. (아무리 오래 걸려도 disk he
 	- 연속 할당을 할 경우 요청이 연속된 실린더 위치에 있어서 이동거리를 줄일 수 있음.
 - 디스크 스케줄링 알고리즘은 필요할 경우 다른 알고리즘으로 쉽게 교체할 수 있도록 OS와 별도의 모듈로 작성되는 것이 바람직하다.
 
+# 6. Swap-Space Management
+
+- Disk를 사용하는 두 가지 이유
+	- memory의 volatile(휘발성)한 특성 -> file system
+		- 전원이 꺼지면 dram memory는 내용이 사라진다.
+		- file system처럼 영속적으로 데이터를 유지해야하는 것은 dram memory에 유지하면 안되기 때문에 비휘발성의 disk를 사용한다.
+	- 프로그램 실행을 위한 memory 공간 부족 -> swap space (swap area)
+		- 프로그램의 주소 공간 전체를 물리적인 메모리에 올려놓기에는 메모리 공간이 부족하다.
+		- memory의 연장 공간으로 disk를 사용한다.
+			- swap space (swap area) 용도로 disk를 사용한다.
+- Swap-space
+	- Virtual memory system에서는 디스크를 memory의 연장 공간으로 사용
+	- 파일시스템 내부에 둘 수도 있으니 별도 partition 사용이 일반적
+		- 공간효율성보다는 속도 효율성이 우선
+		- 일반 파일보다 훨씬 짧은 시간만 존재하고 자주 참조됨
+		- 따라서, block의 크기 및 저장 방식이 일반 파일시스템과 다름
+
+![](/bin/OS_image/os_12_9.png)
+
+물리적 disk를 파티셔닝하여 logical disk를 만든다.
+
+운영체제는 각각의 logical disk를 독립적인 disk로 간주한다.
+
+각각의 logical disk는 file system을 설치해서 사용하거나 swap area 용도로 사용할 수도 있다.
+
+- file system
+	- 보통 file system은 sector 1개당 512byte, unified buffer cache의 경우 buffer cache를 page cache처럼 관리해서 4KB.
+- swap area
+	- 프로그램이 실행되는 동안에 swap area에 머물러 있던 프로세스의 주소 공간이 프로그램이 끝나면 사라질 내용이다. 
+	- 물리적인 memory의 연장 공간으로 쓰기 때문에 쫒겨날때도 가능한 빨리 disk에 써줘야하고 swap area에 있는 것을 page fault가 나서 다시 물리적인 memory에 올릴때도 굉장히 빨리 올려야한다.
+	- disk에 접근하는 시간의 대부분은 디스크의 head가 움직이는 시간(seek time)
+		- seek time을 줄여서 공간 효율성보다는 속도 효율성을 높이는 것이 중요하다.
+			- 프로세스가 끝나면 사라지는 내용이라서 공간 효율성은 그다지 중요하지 않다.
+	- swap area에 데이터를 올리고 내리는 단위는 굉장히 큰 단위를 순차적으로 할당한다.
+		- 512KB.
+		- 경우에 따라서는 크기를 다르게 할당한다.
+
+# 7. RAID
+
+## A. RAID (Redundant Array of Independent Disks)
+
+> 여러개의 디스크에 데이터를 중복 or 분산 저장한다.
+
+- 여러 개의 디스크를 묶어서 사용
+
+### a. RAID의 사용 목적
+
+- 디스크 처리 속도 향상
+	- 여러 디스크에 block의 내용을 분산 저장
+	- 병렬적으로 읽어 옴 (interleaving, striping)
+- 신뢰성 (reliability) 향상
+	- 동일 정보를 여러 디스크에 중복 저장
+	- 하나의 디스크가 고장(fault)시 다른 디스크에서 읽어옴 (Mirroring, shadowing)
+	- 단순한 중복 저장이 아니라 일부 디스크에 parity를 저장하여 공간의 효율성을 높일 수 있다.
+
+![](/bin/OS_image/os_12_10.png)
+ 
+## B. RAID 0 (스트라이핑)
+
+- 일련의 데이터를 논리적 디스크 배열 하나에 일정한 크기로 나눠서 분산 저장하는 방법
+- 하나의 디스크가 망가지면 전체 데이터에 손실이 발생한다.
+- 속도는 디스크 갯수만큼 빨라짐, 용량도 디스크 갯수만큼 늘어남.
+	- 안정성은 낮아짐
+
+![](/bin/OS_image/os_12_11.png)
+
+## C. RAID 1 (미러링)
+
+- 디스크를 통째로 백업하는 방식
+- 최소 디스크 갯수 2개
+
+![](/bin/OS_image/os_12_12.png)
+
+## D. RAID 2 (허밍코드를 이용한 중복)
+
+- 데이터를 스트라이핑 방식으로 저장하고, 패리티 비트(허밍 코드)들은 ESS 디스크에 대응하는 위치에 ECC/Ax, ECC/Ay, ECC/Az를 저장한다.
+- 디스크, 허밍코드 하나씩 망가지면 복구할 수 없다.
+- 복구시 100% 완벽하게 복구된다.
+- 최소 디스크 갯수 5개 이상 -> 데이터 2개, 허밍코드 3개
+
+![](/bin/OS_image/os_12_17.png)
+
+## E. RAID 3 (비트 인터리브된 패리티)
+
+- 별도의 드라이브 한대를 패리티 드라이브로 사용한다.
+- 복구시 90% 복구된다.
+- 디스크 2개가 동시에 망가지면 살아날 확률이 줄어든다.
+- 최소 디스크 갯수 3개 -> 데이터 2개, 패리티 1개
+
+![](/bin/OS_image/os_12_13.png)
+
+## F. RAID 4 (블록 인터리브된 패리티)
+
+- 디스크(데이터, 패리티) 2개가 망가지면 복구하기 힘들다.
+- RAID 3에서 패리티 비트를 블록 단위로 저장
+- 최소 디스크 갯수 3개 -> 데이터 2개, 패리티 1개
+
+![](/bin/OS_image/os_12_14.png)
+
+## G. RAID 5 (블록 인터리브된 분산 패리티 블록)
+
+- 별도의 패리티 드라이브 대신 모든 드라이브에 패리티 정보를 나눠서 저장
+- 최소 디스크 갯수 3개
+
+![](/bin/OS_image/os_12_15.png)
+
+## H. RAID 0 + 1 / RAID 10
+
+- 2개는 스트라이핑, 2개는 미러링
+- 최소 디스크 4개 -> 디스크 2개, 미러링 디스크 2개
+
+![](/bin/OS_image/os_12_16.png)
+
 # 참고자료
 
 [1] 반효경, [이화여자대학교 :: CORE Campus (ewha.ac.kr)](https://core.ewha.ac.kr/publicview/C0101020140408134626290222?vmode=f). kocw. [운영체제 - 이화여자대학교 | KOCW 공개 강의](http://www.kocw.net/home/cview.do?cid=3646706b4347ef09). (accessed Dec 2, 2021)
