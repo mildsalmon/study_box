@@ -19,3 +19,13 @@
 # 📃 오늘의 기록 정리
 
 공부한 내용은 따로 branch에 push해서 [Pull requests](https://github.com/mildsalmon/Study/pulls?q=is%3Apr+is%3Aclosed)로 매일을 정리합니다.
+
+# 👨‍👦‍👦 함께 공부하기
+
+아래 Gather를 이용하여 화상공유를하며 공부합니다.
+
+[Gather](https://gather.town/invite?token=pRWXuGxfanYbJLhoMCx7sKz0HJuCFT6G)
+
+- 이 방식의 장점
+  - 딴짓하는 횟수가 줄어든다.
+  - 같이 공부하는 느낌이 들어서 덜 외롭다.
