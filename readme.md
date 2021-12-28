@@ -27,5 +27,18 @@
 [Gather](https://gather.town/invite?token=pRWXuGxfanYbJLhoMCx7sKz0HJuCFT6G)
 
 - 이 방식의 장점
-  - 딴짓하는 횟수가 줄어든다.
-  - 같이 공부하는 느낌이 들어서 덜 외롭다.
+  - 딴짓하는 횟수가 줄어듬.
+  - 같이 공부하는 느낌이 들어서 덜 외로움.
+
+# 🍅 뽀모도로 공부법
+
+> 50분 공부 / 10분 휴식
+
+한 번 공부를 시작하면 시간을 나눠서 휴식을 취하기가 어렵습니다.  
+그래도 건강을 생각해서 주기적으로 휴식을 취해야합니다.  
+그리고 쉬는 시간이 너무 길어지지 않도록 조절하기 위해서 뽀모도로를 활용하기로 했습니다.  
+아래 유튜브 채널을 활용하여 뽀모도로를 이용하고 있습니다.  
+
+| StudyMD | Study buddy GONGPASSU공팟수 |
+| ---| ---|
+|[StudyMD](https://www.youtube.com/channel/UC5CRP-6oxYenIgBj17CkBZg) | [Study buddy GONGPASSU공팟수](https://www.youtube.com/channel/UCZCGra_Jm5vxHFGEnp2FZkA/videos) |
