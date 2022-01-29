@@ -1,0 +1,53 @@
+# 1. HTTP (Hyper Text Transfer Protocol)
+
+- www를 위한 [[Session Layer]] 프로토콜
+- HTML을 기본 [[Presentation Layer]]으로 사용.
+- **[[stateless protocol]]**
+- 단순한 프로토콜
+
+## A. 목적
+
+전세계 인터넷에 있는 정보를 탐색하는 것
+
+## B. 발명 (만들어진 계기)
+
+Tim Berners-Lee가 CERN에서 1980년대 말 ~ 1990년대 초에 만듬.
+
+## C. 동작
+
+- Web 자료를 가져와서(GET) 보여주기.
+- Web 에 자료를 Posting하기. (POST)
+
+1. URL 입력
+2. client가 web server에 요청(GET)
+3. web server가 client에게 응답
+
+---
+
+![](/bin/Network_image/network_3_1.png)
+
+이 프로토콜은 TCP를 기반으로 한다.
+
+TCP는 연결이 존재하는 프로토콜이기 때문에, 사용자가 URL을 입력하면 TCP 연결을 위한 동작이 GET 요청 앞에 들어가야한다.
+
+연결은 client가 server한테 한다. server는 서버 소켓을 열어두고 client는 열려있는 서버 소켓으로 TCP 연결을 한다.
+
+server의 IP(host name), port(80번)을 통해서 web server 프로세스에 접근한다.
+
+연결이 이루어지면, 연결을 통해서 get / post 요청을 한다.
+
+응답이 끝나면 TCP 연결을 종료한다.
+
+## D. URL & URI
+
+### a. [[URI]] (Universal Resource Identifier)
+
+### b. [[URL]] (Universal Resource Locator)
+
+## E. [[HTTP Method]]
+
+## F. HTTP 성능
+
+### a. [[다중 Transaction을 통한 HTTP 성능향상]]
+
+### b. [[네트워크 구조를 통한 HTTP 성능향상]]
