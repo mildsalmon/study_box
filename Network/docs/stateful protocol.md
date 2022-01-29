@@ -1,3 +1,9 @@
+# Table of Contents
+
+- [stateful protocol](#stateful-protocol)
+
+---
+
 # stateful protocol
 
 - 클라이언트가 서버에 로그인하고 그 안에서 필요한 작업을 하고 로그아웃할때까지 **서버가 모든 상태 정보를 관리**한다.

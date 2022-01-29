@@ -1,3 +1,9 @@
+# Table of Contents
+
+- [packet loss](#packet-loss)
+
+---
+
 # packet loss
 
 - 정상적으로 와야하는 패킷이 안오면 모든 사람들의 대역폭을 줄임. 그럼 어느 순간 모두가 네트워크를 사용할 수 있는 순간이 옴.
