@@ -31,7 +31,7 @@
 
 ## B. TCP/IP 5계층
 
-- [[Application Layer]], [[Presentation Layer]], [[Session Layer]]를 묶어서 표현
+- [[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md), [[Presentation Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Presentation%20Layer.md), [[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md)를 묶어서 표현
 
 ---
 
@@ -109,18 +109,18 @@
 		
 		![](/bin/Network_image/network_2_5.png)
 		
-## C. [[소켓 통신]]
+## C. [[소켓 통신]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/%EC%86%8C%EC%BC%93%20%ED%86%B5%EC%8B%A0.md)
 
 # 4. Cookie (쿠키)
 
-## A. [[Cookie]] (쿠키)
+## A. [[Cookie]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Cookie.md)(쿠키)
 
-## B. [[Session]] (세션)
+## B. [[Session]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session.md)(세션)
 
 ## C. 예
 
 - 몇 번 방문했는지?
-	- [[Cookie|쿠키]]
+	- [[Cookie]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Cookie.md)(쿠키)
 		- 클라이언트에 저장
-	- [[Session|세션]]
+	- [[Session]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session.md)(세션)
 		- 서버에 저장
