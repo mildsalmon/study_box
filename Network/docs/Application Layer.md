@@ -10,8 +10,8 @@
   - [B. 프로세스 주소](#b-프로세스-주소)
   - [C. [소켓 통신]](#c-소켓-통신)
 - [4. Cookie (쿠키)](#4-cookie-쿠키)
-  - [A. [Cookie](쿠키)](#a-cookie쿠키)
-  - [B. [Session](세션)](#b-session세션)
+  - [A. [Cookie]\(쿠키)](#a-cookie쿠키)
+  - [B. [Session]\(세션)](#b-session세션)
   - [C. 예](#c-예)
 
 ---
