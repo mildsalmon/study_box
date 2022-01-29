@@ -7,12 +7,12 @@
 	![](/bin/Network_image/network_3_13.png)
 	
 - 웹 서버
-	- [[stateless protocol]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/stateless%20protocol.md)은 [[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md) (HTTP)에만 적용되고, 서버 응용([[Application Layer]])은 [[stateless protocol]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/stateless%20protocol.md) 가 아님.
+	- [[stateless protocol]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/stateless%20protocol.md)은 [[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md)(HTTP)에만 적용되고, 서버 응용([[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md))은 [[stateless protocol]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/stateless%20protocol.md)가 아님.
 	- HTTP ([[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md))
 		- 바둑판, 바둑알, 규칙
-	- 서버응용 ([[Application Layer]])
+	- 서버응용 ([[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md))
 		- 바둑을 두는 사람
-	- 밑에 있는 Layer들([[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md) )이 서버 응용이 여러가지 일을 할 수 있는 자유도를 주기 때문에 여러가지 서비스를 즐길 수 있다.
+	- 밑에 있는 Layer들([[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md))이 서버 응용이 여러가지 일을 할 수 있는 자유도를 주기 때문에 여러가지 서비스를 즐길 수 있다.
 
 	![](/bin/Network_image/network_3_14.png)
 
@@ -51,10 +51,10 @@
 
 ![](/bin/Network_image/network_3_21.png)
 
-[[Application Layer]]에서 이런 쿠키들이 왔다갔다 하고 [[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md) 에서는 그 정보를 이용하지 않는다. 쿠키를 [[Application Layer]]으로 던져줄 뿐이다.
+[[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)에서 이런 쿠키들이 왔다갔다 하고 [[Session Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session%20Layer.md)에서는 그 정보를 이용하지 않는다. 쿠키를 [[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)으로 던져줄 뿐이다.
 
 ## D. 문제
 
 - 클라이언트에게 너무 많은 권한과 정보를 준다.
 	- 해결책
-		- 이 문제를 해결하는 방법이 [[Session]]
+		- 이 문제를 해결하는 방법이 [[Session]]http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session.md

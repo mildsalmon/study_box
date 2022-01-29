@@ -13,6 +13,6 @@
 
 # 2. FTP & HTTP
 
-## A. [[FTP]] (File Transfer Protocol)
+## A. [[FTP]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/FTP.md) (File Transfer Protocol)
 
-## B. [[HTTP]] (Hyper Text Transfer Protocol)
+## B. [[HTTP]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/HTTP.md) (Hyper Text Transfer Protocol)

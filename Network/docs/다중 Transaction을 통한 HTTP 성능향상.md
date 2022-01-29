@@ -18,9 +18,9 @@
 
 ## A. 성능
 
-1. 끝단간 [[지연시간]]
+1. 끝단간 [[지연시간]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/%EC%A7%80%EC%97%B0%EC%8B%9C%EA%B0%84.md)
 	- 100ms
-2. [[전송률]]
+2. [[전송률]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/%EC%A0%84%EC%86%A1%EB%A5%A0.md)
 	- 100KB/s
 3. 전송받고자하는 정보
 	- HTML 페이지

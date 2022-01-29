@@ -12,6 +12,6 @@
 
 # 2. 인터넷 전송계층의 서비스
 
-## A. [[TCP]]
+## A. [[TCP]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/TCP.md)
 
-## B. [[UDP]]
+## B. [[UDP]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/UDP.md)
