@@ -1,3 +1,21 @@
+# Table of Contents
+
+- [1. DNS (Domain Name System)](#1-dns-domain-name-system)
+  - [A. 서비스](#a-서비스)
+    - [a. 도메인 네임 서비스가 다른 응용 layer와 다른점](#a-도메인-네임-서비스가-다른-응용-layer와-다른점)
+  - [B. Domain Name Server의 계층](#b-domain-name-server의-계층)
+    - [a. 최상위 (Root Name Server)](#a-최상위-root-name-server)
+    - [b. Top level domain](#b-top-level-domain)
+    - [c. authorized dns (공인된 dns)](#c-authorized-dns-공인된-dns)
+  - [C. 도메인 네임 서비스를 받는 방법](#c-도메인-네임-서비스를-받는-방법)
+    - [a. recursive Domain Name resolution](#a-recursive-domain-name-resolution)
+      - [ㄱ) 실습](#ㄱ-실습)
+    - [b. Iterative](#b-iterative)
+      - [ㄱ) 실습](#ㄱ-실습-1)
+      - [ㄴ) 계층형 DNS별로 요청](#ㄴ-계층형-dns별로-요청)
+
+---
+
 # 1. DNS (Domain Name System)
 
 > 도메인을 입력하면 거기에 해당하는 IP를 매핑해준다.
