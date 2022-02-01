@@ -15,6 +15,8 @@
   - [A. [Cookie]\(쿠키)](#a-cookie쿠키)
   - [B. [Session]\(세션)](#b-session세션)
   - [C. 예](#c-예)
+- [5. [DNS] (Domain Name System, Server)](#5-dns-domain-name-system-server)
+- [6. [P2P] (peer-to-peer)](#6-p2p-peer-to-peer)
 
 ---
 
