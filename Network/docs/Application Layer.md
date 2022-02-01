@@ -128,3 +128,7 @@
 		- 클라이언트에 저장
 	- [[Session]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Session.md)(세션)
 		- 서버에 저장
+
+# 5. [[DNS]] (Domain Name System, Server)
+
+# 6. [[P2P]] (peer-to-peer)
