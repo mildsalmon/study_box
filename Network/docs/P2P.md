@@ -1,3 +1,13 @@
+# Table of Contents
+
+- [1. P2P (peer-to-peer)](#1-p2p-peer-to-peer)
+  - [A. 단점](#a-단점)
+  - [B. 종류](#b-종류)
+    - [a. Hybrid System](#a-hybrid-system)
+    - [b. pure P2P](#b-pure-p2p)
+
+---
+
 # 1. P2P (peer-to-peer)
 
 - 서버없이 단말(peer)들끼리 직접 상호간 서비스를 제공하는 시스템 (물물교환)
