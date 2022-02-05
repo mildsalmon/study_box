@@ -46,16 +46,14 @@ ORDER BY 2 DESC
 spark.sql(query).show(3)
 
 # + active=""
-# +----+-----+
-# |lang|count|
-# +----+-----+
-# |  ja|42322|
-# |  en|41562|
-# | und|12847|
-# +----+-----+
-# only showing top 3 rows
+# +----+------+
+# |lang| count|
+# +----+------+
+# |  en|684768|
+# |  ja|383212|
+# | und|185301|
+# +----+------+
 # -
-
 # ### B. 텍스트 데이터의 가공
 
 # +
@@ -81,26 +79,26 @@ def text_split(row):
 en_tweets.rdd.take(1)
 
 # + active=""
-# [Row(time='2022-02-01 20:13:20', text='***New In***Vintage Union Jack Flags. https://t.co/C2vB2LnJ9d')]
+# [Row(time='2022-02-01 20:13:50', text='RT @Preeti_Nishad5: My idol has a wax statue at Madame Tussauds and his idol was invited for 2021 actors roundtable the difference 🤧🤧')]
 # -
 
 # flatMap()에 제네레이터 함수 적용
 en_tweets.rdd.flatMap(text_split).take(2)
 
 # + active=""
-# [Row(time='2022-02-01 20:13:20', word='***New'), Row(time='2022-02-01 20:13:20', word='In***Vintage')]
+# [Row(time='2022-02-01 20:13:50', word='RT'), Row(time='2022-02-01 20:13:50', word='@Preeti_Nishad5:')]
 # -
 
 # toDF()를 사용해 데이터 프레임으로 변환
 en_tweets.rdd.flatMap(text_split).toDF().show(2)
 
-# + active=""
-# +-------------------+------------+
-# |               time|        word|
-# +-------------------+------------+
-# |2022-02-01 20:13:20|      ***New|
-# |2022-02-01 20:13:20|In***Vintage|
-# +-------------------+------------+
+# + -------------------+------------+ active=""
+# +-------------------+----------------+
+# |               time|            word|
+# +-------------------+----------------+
+# |2022-02-01 20:13:50|              RT|
+# |2022-02-01 20:13:50|@Preeti_Nishad5:|
+# +-------------------+----------------+
 # only showing top 2 rows
 # -
 
@@ -119,18 +117,17 @@ GROUP BY 1
 ORDER BY 2 DESC
 '''
 
-spark.sql(query).show(3)
+spark.sql(word_count_query).show(3)
 
 # + active=""
-# +----+-----+
-# |lang|count|
-# +----+-----+
-# |  ja|43337|
-# |  en|42705|
-# | und|13121|
-# +----+-----+
+# +----+------+
+# |word| count|
+# +----+------+
+# |  RT|403096|
+# | the|203869|
+# |  to|161376|
+# +----+------+
 # only showing top 3 rows
-
 # +
 # 분해한 단어를 테이블로 보관
 words.write.saveAsTable('twitter_sample_words')

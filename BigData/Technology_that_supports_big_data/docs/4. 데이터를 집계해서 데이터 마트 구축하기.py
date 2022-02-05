@@ -20,7 +20,7 @@
 spark.table('twitter_sample_words').count()
 
 # + active=""
-# 411500
+# 9624949
 
 # +
 # 1시간마다 그룹화하여 집계
@@ -36,7 +36,7 @@ GROUP BY 1, 2
 spark.sql(query).count()
 
 # + active=""
-# 94929
+# 2023431
 # -
 
 # ## A. 카디널리티의 삭감
@@ -60,15 +60,14 @@ ORDER BY 1
 spark.sql(query).show(3)
 
 # + active=""
-# +-----+-----+
-# |count|words|
-# +-----+-----+
-# |    1|69388|
-# |    2|10578|
-# |    3| 4192|
-# +-----+-----+
+# +-----+------+
+# |count| words|
+# +-----+------+
+# |    1|775110|
+# |    2|115315|
+# |    3| 47315|
+# +-----+------+
 # only showing top 3 rows
-
 # +
 # 단어를 카테고리로 나누는 디멘전 테이블
 query = '''
@@ -86,18 +85,17 @@ FROM (
 spark.sql(query).show(5)
 
 # + active=""
-# +------------+-----+---------+
-# |        word|count| category|
-# +------------+-----+---------+
-# |       team!|   31| COUNT=31|
-# |       still|  281|COUNT=281|
-# |@wildcardp2e|    2|  COUNT=2|
-# |      outfit|   13| COUNT=13|
-# |      jihoon|    2|  COUNT=2|
-# +------------+-----+---------+
+# +-----+-----+---------+
+# | word|count| category|
+# +-----+-----+---------+
+# |  few| 2028|      few|
+# | hope| 3073|     hope|
+# | AWAY|  219|COUNT=219|
+# |still| 6400|    still|
+# |those| 3542|    those|
+# +-----+-----+---------+
 # only showing top 5 rows
 # -
-
 # 일시적인 뷰로 등록
 spark.sql(query).createOrReplaceTempView('word_category')
 
@@ -115,7 +113,7 @@ GROUP BY 1, 2
 spark.sql(query).count()
 
 # + active=""
-# 342
+# 27376
 # -
 
 # ## B. CSV 파일의 작성
