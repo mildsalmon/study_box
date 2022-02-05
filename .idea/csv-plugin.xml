@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\BigData\Technology_that_supports_big_data\twitter\adhoc\word_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\BigData\Technology_that_supports_big_data\그림_ver\1장\access_log.csv">
           <value>
             <Attribute>
