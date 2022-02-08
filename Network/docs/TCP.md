@@ -1,6 +1,15 @@
 # Table of Contents
 
-- [TCP](#tcp)
+- [1. TCP](#1-tcp)
+  - [A. 연결기반 전송 계층](#a-연결기반-전송-계층)
+  - [B. 연결에 대한 관리](#b-연결에-대한-관리)
+  - [C. 데이터 순서를 보장한다. (신뢰성을 제공한다. / Reliable network (reliable community))](#c-데이터-순서를-보장한다-신뢰성을-제공한다--reliable-network-reliable-community)
+  - [D. 혼잡에 민감하게 패킷전송률을 조정한다.](#d-혼잡에-민감하게-패킷전송률을-조정한다)
+  - [E. 전송단위](#e-전송단위)
+  - [F. 내용 변조 탐지](#f-내용-변조-탐지)
+  - [G. 포트(사서함)개념 지원](#g-포트사서함개념-지원)
+- [2. 계층적으로 생각해보면.](#2-계층적으로-생각해보면)
+- [3. [[TCP 세그먼트 내 헤더 구성]]](#3-tcp-세그먼트-내-헤더-구성)
 
 ---
 
@@ -8,9 +17,9 @@
 
 > connection oriented (연결 지향)
 
-> 신뢰도가 중요한 [[Application Layer]]에 사용한다.
+> 신뢰도가 중요한 [[Application Layer]](https://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)에 사용한다.
 
-![](/bin/Network_image/network_2_6.png]]
+![](/bin/Network_image/network_2_6.png)
 
 ## A. 연결기반 전송 계층
 
@@ -79,4 +88,4 @@
 
 계층이 내려갈때마다 헤더가 하나씩 붙고, 계층이 올라갈때마다 헤더가 하나씩 제거되면서 원래 내용을 보여준다.
 
-# 3. [[TCP 세그먼트 내 헤더 구성]]
+# 3. [[TCP 세그먼트 내 헤더 구성]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/TCP%20%EC%84%B8%EA%B7%B8%EB%A8%BC%ED%8A%B8%20%EB%82%B4%20%ED%97%A4%EB%8D%94%20%EA%B5%AC%EC%84%B1.md)

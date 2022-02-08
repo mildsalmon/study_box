@@ -1,6 +1,26 @@
+# Table of Contents
+
+- [1. TCP 세그먼트 내 헤더 구성](#1-tcp-세그먼트-내-헤더-구성)
+  - [A. Source/Destination Port Number (각 16 비트)](#a-sourcedestination-port-number-각-16-비트)
+    - [a. 소켓 vs 포트](#a-소켓-vs-포트)
+      - [1) 예제](#1-예제)
+  - [B. Sequence Number (32 비트)](#b-sequence-number-32-비트)
+  - [C. Acknowledgement Number (32 비트)](#c-acknowledgement-number-32-비트)
+    - [a. Seq #, Ack #](#a-seq--ack-)
+  - [D. 헤더 길이 필드 (Header Length / HLEN, 4 비트)](#d-헤더-길이-필드-header-length--hlen-4-비트)
+  - [E. flag bits (URG, ACK, PSH, RST, SYN, FIN)](#e-flag-bits-urg-ack-psh-rst-syn-fin)
+    - [a. 관계된 기능](#a-관계된-기능)
+  - [F. 윈도우 크기 (Window size, 16 비트)](#f-윈도우-크기-window-size-16-비트)
+    - [a. 만약, 수신측의 buffer가 꽉 차면.](#a-만약-수신측의-buffer가-꽉-차면)
+  - [G. checksum](#g-checksum)
+    - [a. 검사합 (checksum 더하기)](#a-검사합-checksum-더하기)
+  - [H. payload](#h-payload)
+
+---
+
 # 1. TCP 세그먼트 내 헤더 구성
 
-> TCP는 [[패킷]]이 아닌 [[세그먼트]]라고 부른다.
+> TCP는 [[패킷]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/%ED%8C%A8%ED%82%B7.md)이 아닌 [[세그먼트]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/%EC%84%B8%EA%B7%B8%EB%A8%BC%ED%8A%B8.md)라고 부른다.
 
 TCP 세그먼트 내의 헤더는 바이너리 형태로 되어 있음.
 
@@ -13,7 +33,7 @@ TCP 세그먼트 내의 헤더는 바이너리 형태로 되어 있음.
 > IP 주소 + 포트 번호 = 소켓 주소
 > > 양쪽 호스트 내 종단 프로세스 식별
 
-- 포트([[Application Layer|응용]])을 구분하고, 거기에 들어가는 각각의 요청에 대한 소켓을 구분하기 위한 용도로 사용하는 것이 TCP의 포트번호임.
+- 포트([[Application Layer|응용]](https://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md))을 구분하고, 거기에 들어가는 각각의 요청에 대한 소켓을 구분하기 위한 용도로 사용하는 것이 TCP의 포트번호임.
 
 ### a. 소켓 vs 포트
 
@@ -75,7 +95,7 @@ TCP 안에 아무런 문자도 갖지 않는 패킷도 보낼 수 있다.
 
 ---
 
-- [[Go-Back-N]] 기법에 기반함
+- [[Go-Back-N]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Go-Back-N.md) 기법에 기반함
 
 ## D. 헤더 길이 필드 (Header Length / HLEN, 4 비트)
 

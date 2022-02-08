@@ -2,8 +2,9 @@
 
 - [1. 전송 계층 (Transport Layer) (=비서) - 4계층](#1-전송-계층-transport-layer-비서---4계층)
 - [2. 인터넷 전송계층의 서비스](#2-인터넷-전송계층의-서비스)
-  - [A. [TCP]](#a-tcp)
-  - [B. [UDP]](#b-udp)
+  - [A. [[TCP]]](#a-tcp)
+  - [B. [[UDP]]](#b-udp)
+- [3. [[Reliable Network]]](#3-reliable-network)
 
 ---
 
@@ -29,8 +30,8 @@
 
 # 2. 인터넷 전송계층의 서비스
 
-## A. [[TCP]]
+## A. [[TCP]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/TCP.md)
 
-## B. [[UDP]]
+## B. [[UDP]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/UDP.md)
 
-# 3. [[Reliable Network]]
+# 3. [[Reliable Network]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Reliable%20Network.md)

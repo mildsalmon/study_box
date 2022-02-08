@@ -1,3 +1,14 @@
+# Table of Contents
+
+- [1. Go-Back-N](#1-go-back-n)
+  - [A. 수신측에서 순서에 맞지 않는(이빨이 빠진) packet이 온 경우의 반응](#a-수신측에서-순서에-맞지-않는이빨이-빠진-packet이-온-경우의-반응)
+  - [B. Go-back-N에서의 재전송 정책](#b-go-back-n에서의-재전송-정책)
+    - [a. 추가 재전송 정책](#a-추가-재전송-정책)
+- [2. 장점](#2-장점)
+- [3. 단점](#3-단점)
+
+---
+
 # 1. Go-Back-N
 
 > N번 패킷까지는 받음. N+1번 패킷 받아야함 !
@@ -19,7 +30,7 @@
 
 	> 수신이 확실하지 않은 packet을 재전송하기 위한 송신측의 보관소.
 
-- 수신측에서는 **순차적**으로 잘 수신된 packet에 대하여 Ack을 송신하고 packet의 내용(payload, 실제 전송하고자 하는 내용)을 [[Application Layer]]으로 올려보낸다.
+- 수신측에서는 **순차적**으로 잘 수신된 packet에 대하여 Ack을 송신하고 packet의 내용(payload, 실제 전송하고자 하는 내용)을 [[Application Layer]](https://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)으로 올려보낸다.
 - 송신측에서는 (ack을 받아서)buffer의 여유가 생기면, 그만큼 추가로 pipelining한다.
 	- ack을 받으면 해당 ack 패킷의 번호는 buffer에서 버린다. (지운다)
 	- 그리고 빈 buffer에 새로운 packet을 추가해서 pipelining을 한다.

@@ -1,12 +1,18 @@
 # Table of Contents
 
 - [1. UDP](#1-udp)
+  - [A. 무연결 전송 계층](#a-무연결-전송-계층)
+  - [B. 관리가 어렵다. (신뢰성이 낮다.)](#b-관리가-어렵다-신뢰성이-낮다)
+  - [C. 데이터 순서가 역전될 수 있다.](#c-데이터-순서가-역전될-수-있다)
+  - [D.최대 성능으로 패킷전송](#d최대-성능으로-패킷전송)
+  - [E. 전송단위](#e-전송단위)
+  - [F. 내용 변조 탐지](#f-내용-변조-탐지)
 
 ---
 
 # 1. UDP
 
-> 속도가 중요한 [[Application Layer]]에 사용한다.
+> 속도가 중요한 [[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)에 사용한다.
 
 ![](/bin/Network_image/network_2_7.png)
 
@@ -14,7 +20,7 @@
 
 패킷보내라고 하면, 패킷 보낸다.
 
-패킷을 받으면, [[Application Layer]]로 올려주고
+패킷을 받으면, [[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)로 올려주고
 
 이 외에는 하는 일이 없다.
 
@@ -38,7 +44,7 @@
 
 - 속도가 빠름
 	- 고의적 지연은 존재하지 않는다.
-		- 1,2,3,4번 packet이 도착하고 5번 packet 없이 6번 packet만 도착하더라도 [[Application Layer]]에 전달해준다.
+		- 1,2,3,4번 packet이 도착하고 5번 packet 없이 6번 packet만 도착하더라도 [[Application Layer]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Application%20Layer.md)에 전달해준다.
 	- 네트워크가 혼잡하더라도 패킷을 보낸다.
 		- 네트워크가 너무 혼잡해진다면, 일부 패킷을 버리게 되어 유실이 발생한다.
 - 실시간성이 중요한 통신에 사용
