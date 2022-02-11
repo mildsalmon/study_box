@@ -31,7 +31,7 @@
 	- 중간에 스위치가 죽거나, 잡음으로 인해 데이터가 깨지는 등의 이유로 데이터 유실이 발생한다.
 	- 한번 보낸 패킷은 반드시 목적지에 도달한다고 생각 할 수 있다.
 		
-## C. 데이터 순서를 보장한다. (신뢰성을 제공한다. / [[Reliable network]]((http://github.com/mildsalmon/Study/blob/Network/Network/docs/Reliable%20Network.md)) (reliable community))
+## C. 데이터 순서를 보장한다. (신뢰성을 제공한다. / [[Reliable network]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Reliable%20Network.md) (reliable community))
 
 - 내용 유실 x
 	- 순서를 보장한다.
@@ -50,7 +50,7 @@
 - 신뢰성있게 통신을 한다.
 - 패킷이 내용의 유실도 없고, 순서가 바뀌지도 않는다.
 
-## D. 혼잡에 민감하게 패킷전송률을 조정한다. ([[혼잡제어]]((http://github.com/mildsalmon/Study/blob/Network/Network/docs/%ED%98%BC%EC%9E%A1%EC%A0%9C%EC%96%B4.md))))
+## D. 혼잡에 민감하게 패킷전송률을 조정한다. ([[혼잡제어]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/%ED%98%BC%EC%9E%A1%EC%A0%9C%EC%96%B4.md))
 
 - 패킷이 많이 유실된다면(네트워크가 혼잡하다면), 네트워크가 덜 혼잡해질때까지 패킷을 쌓아놓고 천천히 보낸다.
 - 속도가 느림
