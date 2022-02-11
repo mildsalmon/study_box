@@ -1,3 +1,12 @@
+# Table of Contents
+
+- [1. Retransmission Timeout (RTO) (재전송 타임아웃)](#1-retransmission-timeout-rto-재전송-타임아웃)
+  - [A. RTO 구하는 식](#a-rto-구하는-식)
+    - [a. 4 표준편차인 이유](#a-4-표준편차인-이유)
+    - [B. 어떻게 평균과 표준편차를 구할 것인가?](#b-어떻게-평균과-표준편차를-구할-것인가)
+
+---
+
 # 1. Retransmission Timeout (RTO) (재전송 타임아웃)
 
 > 패킷 유실을 결정하는 timeout = 재전송을 결정하는 **timeout**
