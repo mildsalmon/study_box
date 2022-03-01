@@ -4,7 +4,7 @@
   - [A. 전체 네트워크에 있는 노드 수가 한정되어 있다면](#a-전체-네트워크에-있는-노드-수가-한정되어-있다면)
   - [B. 노드 수가 무한하다면](#b-노드-수가-무한하다면)
   - [C. Routing](#c-routing)
-- [2. [Routing Protocol Algorithm](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Routing%20Protocol%20Algorithm.md)](#2-routing-protocol-algorithm)
+- [2. [Routing Protocol Algorithm]](#2-routing-protocol-algorithm)
 - [3. Routing Table](#3-routing-table)
   - [a. 라우팅 테이블이 하는 역할](#a-라우팅-테이블이-하는-역할)
 

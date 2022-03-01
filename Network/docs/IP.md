@@ -5,9 +5,10 @@
   - [B. IPv4](#b-ipv4)
 - [2. IP 주소체계](#2-ip-주소체계)
   - [A. 주민등록번호처럼 부여하면?](#a-주민등록번호처럼-부여하면)
-    - [a. 문제점](#a-문제점-1)
+    - [a. 문제점](#a-문제점)
     - [b. 만약 IP 개수가 충분하다면?](#b-만약-ip-개수가-충분하다면)
   - [B. 우편주소체계(보편주소체계)로 만들면?](#b-우편주소체계보편주소체계로-만들면)
+    - [a. 문제점](#a-문제점-1)
   - [C. Classless Inter Domain Routing (CIDR)](#c-classless-inter-domain-routing-cidr)
     - [a. 문제점](#a-문제점-2)
     - [b. 해결방안](#b-해결방안)
@@ -24,7 +25,7 @@
   - [I. Data (본문)](#i-data-본문)
 - [4. IP 할당](#4-ip-할당)
   - [A. DHCP (Dynamic Host Configuration Protocol)](#a-dhcp-dynamic-host-configuration-protocol)
-  - [B. [NAT](http://github.com/mildsalmon/Study/blob/Network/Network/docs/NAT.md) (Network Address Translation)](#b-nat-network-address-translation)
+  - [B. [NAT](Network Address Translation)](#b-nat-network-address-translation)
 
 ---
 
