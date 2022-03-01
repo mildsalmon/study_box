@@ -12,3 +12,10 @@
 	- ![](/bin/Network_image/network_1_12.png)
 - 다음단으로의 전달을 책임짐.
 - 패킷을 다음 스위치까지의 전송을 책임지는 layer
+
+---
+
+- 이더넷
+- wifi
+- LTE
+- 3G
