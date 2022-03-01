@@ -21,6 +21,12 @@
 - **[[stateless protocol]](http://github.com/mildsalmon/Study/blob/Network/Network/docs/stateless%20protocol.md)**
 - 단순한 프로토콜
 
+---
+
+- 웹 서비스를 받는 프로토콜
+    - 웹 홈페이지 받아오고, 홈페이지 안에 있는 그림 파일 받아오는 등
+- FTP와 다르게 단순하게 설계되어서 확장성이 높다.
+
 ## A. 목적
 
 전세계 인터넷에 있는 정보를 탐색하는 것
