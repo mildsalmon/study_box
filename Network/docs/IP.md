@@ -1,3 +1,33 @@
+# Table of Contents
+
+- [1. IP](#1-ip)
+  - [A. IPv6](#a-ipv6)
+  - [B. IPv4](#b-ipv4)
+- [2. IP 주소체계](#2-ip-주소체계)
+  - [A. 주민등록번호처럼 부여하면?](#a-주민등록번호처럼-부여하면)
+    - [a. 문제점](#a-문제점-1)
+    - [b. 만약 IP 개수가 충분하다면?](#b-만약-ip-개수가-충분하다면)
+  - [B. 우편주소체계(보편주소체계)로 만들면?](#b-우편주소체계보편주소체계로-만들면)
+  - [C. Classless Inter Domain Routing (CIDR)](#c-classless-inter-domain-routing-cidr)
+    - [a. 문제점](#a-문제점-2)
+    - [b. 해결방안](#b-해결방안)
+- [3. IP 헤더](#3-ip-헤더)
+  - [A. 헤더 길이](#a-헤더-길이)
+  - [B. fragment](#b-fragment)
+    - [a. 라우터의 역할](#a-라우터의-역할)
+  - [C. TTL (Time to Live)](#c-ttl-time-to-live)
+  - [D. upper layer](#d-upper-layer)
+  - [E. header checksum](#e-header-checksum)
+  - [F. Source IP 주소](#f-source-ip-주소)
+  - [G. Destination IP 주소](#g-destination-ip-주소)
+  - [H. option](#h-option)
+  - [I. Data (본문)](#i-data-본문)
+- [4. IP 할당](#4-ip-할당)
+  - [A. DHCP (Dynamic Host Configuration Protocol)](#a-dhcp-dynamic-host-configuration-protocol)
+  - [B. [NAT](http://github.com/mildsalmon/Study/blob/Network/Network/docs/NAT.md) (Network Address Translation)](#b-nat-network-address-translation)
+
+---
+
 # 1. IP
 
 ## A. IPv6
@@ -58,7 +88,7 @@
 
 - 계층 예외를 두는 것을 가능하게 한다.
 	- 완전히 계층적이지 않음.
-- [[subnet]]
+- [subnet](http://github.com/mildsalmon/Study/blob/Network/Network/docs/subnet.md)
 
 # 3. IP 헤더
 
@@ -177,4 +207,4 @@
 
 ![](/bin/Network_image/network_7_16.png)
 
-## B. [[NAT]] (Network Address Translation)
+## B. [NAT](http://github.com/mildsalmon/Study/blob/Network/Network/docs/NAT.md) (Network Address Translation)

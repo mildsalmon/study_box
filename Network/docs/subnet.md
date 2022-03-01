@@ -1,3 +1,10 @@
+# Table of Contents
+
+- [1. Subnet](#1-subnet)
+- [2. Routing Table과 subnet](#2-routing-table과-subnet)
+
+---
+
 # 1. Subnet
 
 > IP를 묶어서 하나의 entry로 생각할 수 있도록 하는 개념
@@ -30,7 +37,7 @@
 		MSB(가장 중요한 bit부터) 24bit를 봤을때 위와 같으면 이 subnet이다.
 		
 		```
-		- [[MSB & LSB]]
+		- [MSB & LSB](http://github.com/mildsalmon/Study/blob/Network/Network/docs/MSB%20%26%20LSB.md)
 	- subnet을 조각화할 수 있다.
 	
 		```ad-example

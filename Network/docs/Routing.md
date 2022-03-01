@@ -1,3 +1,15 @@
+# Table of Contents
+
+- [1. Routing](#1-routing)
+  - [A. 전체 네트워크에 있는 노드 수가 한정되어 있다면](#a-전체-네트워크에-있는-노드-수가-한정되어-있다면)
+  - [B. 노드 수가 무한하다면](#b-노드-수가-무한하다면)
+  - [C. Routing](#c-routing)
+- [2. [Routing Protocol Algorithm](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Routing%20Protocol%20Algorithm.md)](#2-routing-protocol-algorithm)
+- [3. Routing Table](#3-routing-table)
+  - [a. 라우팅 테이블이 하는 역할](#a-라우팅-테이블이-하는-역할)
+
+---
+
 # 1. Routing
 
  - 목적지가 주어졌을때, 각각의 네트워크 중앙에 있는 장비들이 패킷을 받으면, 다음 단계로 넘겨주는 것
@@ -22,7 +34,7 @@
 
 > 어떤 패킷이 있고, 다음 hop이 현재 hop보다 목적지에 가깝다면, 최종적으로 목적지에 갈 수 있다.
 
-# 2. [[Routing Protocol Algorithm]]
+# 2. [Routing Protocol Algorithm](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Routing%20Protocol%20Algorithm.md)
 
 # 3. Routing Table
 
@@ -40,5 +52,5 @@
 - 다만, 이를 구현하려면 라우팅 테이블에 모든 목적지 IP 주소가 입력되어야 한다.
 	- 이는 매우 비효율적인 방법이다.
 	- 따라서, 목적지 IP 주소가 비슷한 곳에 있다면, Next hop은 같을 것이기 때문에 묶어서 표현해보자.
-		- [[subnet#2 Routing Table과 subnet]]
+		- [subnet#2 Routing Table과 subnet](https://github.com/mildsalmon/Study/blob/Network/Network/docs/subnet.md#2-routing-table%EA%B3%BC-subnet)
 

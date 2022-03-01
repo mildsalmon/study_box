@@ -23,10 +23,10 @@
 
 > 주소가 주어지고, 패킷을 순차적으로 보내다보면, 최종적으로 목적지까지 가도록 만드는 역할을 함
 
-# 2. [[Routing]]
+# 2. [Routing](http://github.com/mildsalmon/Study/blob/Network/Network/docs/Routing.md)
 
-# 3. [[IP]]
+# 3. [IP](http://github.com/mildsalmon/Study/blob/Network/Network/docs/IP.md)
 
 # 4. 라우터
 
-> 각각의 네트워크 장비들이 [[Routing#C Routing Table|Routing Table]](포워딩 테이블)을 통해 경로를 찾는다.
+> 각각의 네트워크 장비들이 [Routing Table](https://github.com/mildsalmon/Study/blob/Network/Network/docs/Routing.md#3-routing-table)(포워딩 테이블)을 통해 경로를 찾는다.

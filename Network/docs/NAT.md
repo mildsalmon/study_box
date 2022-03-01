@@ -1,3 +1,20 @@
+# Table of Contents
+
+- [1. NAT (Network Address Translation)](#1-nat-network-address-translation)
+  - [A. Port Mapping Table](#a-port-mapping-table)
+    - [a. Endpoint Independent Mapping Table (EIM)](#a-endpoint-independent-mapping-table-eim)
+      - [ㄱ) EIM의 예시](#ㄱ-eim의-예시)
+      - [ㄴ) EIM의 단점](#ㄴ-eim의-단점)
+    - [b. Endpoint Dependent Mapping Table (EDM)](#b-endpoint-dependent-mapping-table-edm)
+      - [ㄱ) EDM의 예시](#ㄱ-edm의-예시)
+      - [ㄴ) EDM의 단점](#ㄴ-edm의-단점)
+        - [1) 해결책](#1-해결책)
+          - [가) static map 사용](#가-static-map-사용)
+          - [나) Relay host](#나-relay-host)
+          - [다) hole puncturing](#다-hole-puncturing)
+
+---
+
 # 1. NAT (Network Address Translation)
 
 - local IP는 아무거나 쓰면 안됨.
