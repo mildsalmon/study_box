@@ -1,6 +1,5 @@
 # Table of Contents
 
-- [물리 계층 (Physical Layer) (=자동차, 도로) - 1계층](#물리-계층-physical-layer-자동차-도로---1계층)
 
 ---
 
@@ -15,3 +14,7 @@
 ---
 
 - 링크 계층과 1:1로 매핑됨
+
+---
+
+- Physical Layer에서는 데이터를 아날로그로 본다.
