@@ -36,7 +36,7 @@ def transform(**context):
         max_temp = day['temp']['max']
         min_temp = day['temp']['min']
 
-        extract_days.append([date, day_temp, max_temp, min_temp])
+        extract_days.append([date, day_temp, min_temp, max_temp])
 
     logging.info(extract_days)
 
@@ -53,7 +53,7 @@ def load(**context):
     sql = f"BEGIN;DELETE FROM {schema}.{table};"
 
     for day in days:
-        print(f"date: {day[0]}, day: {day[1]}, max: {day[2]}, min: {day[3]}")
+        print(f"date: {day[0]}, day: {day[1]}, min: {day[2]}, max: {day[3]}")
         sql += f"INSERT INTO {schema}.{table} VALUES ('{day[0]}', '{day[1]}', '{day[2]}', '{day[3]}');"
     sql += "END;"
 
