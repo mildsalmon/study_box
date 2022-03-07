@@ -62,7 +62,7 @@ def load(**context):
                 create_date timestamp default GETDATE()
             );
             """
-    sql += f"""INSERT INTO {schema}.{table}
+    sql += f"""INSERT INTO {schema}.{temp_table}
                 SELECT date, temp, min_temp, max_temp, create_date
                 FROM {schema}.{table}
                 ;"""
@@ -98,7 +98,7 @@ weather_forecast_incremental_update = DAG(
     dag_id='weather_forecast_incremental_update',
     start_date=datetime(2022, 3, 6),
     schedule_interval='0 2 * * *',
-    catchup=True,
+    catchup=False,
     default_args={
         'retries': 1,
         'retry_delay': timedelta(minutes=3),
