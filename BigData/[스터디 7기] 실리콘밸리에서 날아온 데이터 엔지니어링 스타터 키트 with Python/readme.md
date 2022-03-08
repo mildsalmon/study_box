@@ -14,7 +14,7 @@
 
 [7장. ETL&Airflow 소개](https://github.com/mildsalmon/Study/blob/Bigdata/BigData/%5B%EC%8A%A4%ED%84%B0%EB%94%94%207%EA%B8%B0%5D%20%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC%EC%97%90%EC%84%9C%20%EB%82%A0%EC%95%84%EC%98%A8%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EC%8A%A4%ED%83%80%ED%84%B0%20%ED%82%A4%ED%8A%B8%20with%20Python/doc/7%EC%9E%A5.%20ETL%26Airflow%20%EC%86%8C%EA%B0%9C.md)
 
-[Study/8장. Airflow Deepdive.md at master · mildsalmon/Study (github.com)](https://github.com/mildsalmon/Study/blob/master/BigData/%5B%EC%8A%A4%ED%84%B0%EB%94%94%207%EA%B8%B0%5D%20%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC%EC%97%90%EC%84%9C%20%EB%82%A0%EC%95%84%EC%98%A8%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EC%8A%A4%ED%83%80%ED%84%B0%20%ED%82%A4%ED%8A%B8%20with%20Python/doc/8%EC%9E%A5.%20Airflow%20Deepdive.md)
+[8장. Airflow Deepdive](https://github.com/mildsalmon/Study/blob/master/BigData/%5B%EC%8A%A4%ED%84%B0%EB%94%94%207%EA%B8%B0%5D%20%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC%EC%97%90%EC%84%9C%20%EB%82%A0%EC%95%84%EC%98%A8%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EC%8A%A4%ED%83%80%ED%84%B0%20%ED%82%A4%ED%8A%B8%20with%20Python/doc/8%EC%9E%A5.%20Airflow%20Deepdive.md)
 
 # 2. 🤔 퀴즈
 
