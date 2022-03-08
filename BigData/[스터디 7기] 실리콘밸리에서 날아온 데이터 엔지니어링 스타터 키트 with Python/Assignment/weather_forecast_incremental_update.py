@@ -54,18 +54,13 @@ def load(**context):
 
     # 임시 테이블에 원래 테이블의 정보를 저장
     sql = f"DROP TABLE IF EXISTS {schema}.{temp_table};"
-    sql += f"""CREATE TABLE {schema}.{temp_table}(
-                date date primary key,
-                temp float,
-                min_temp float,
-                max_temp float,
-                create_date timestamp default GETDATE()
-            );
+    sql += f"""CREATE TABLE {schema}.{temp_table} (like {schema}.{table});"""
+    sql += f"""
+            INSERT INTO {schema}.{temp_table}
+            SELECT date, temp, min_temp, max_temp, create_date
+            FROM {schema}.{table}
+            ;
             """
-    sql += f"""INSERT INTO {schema}.{temp_table}
-                SELECT date, temp, min_temp, max_temp, create_date
-                FROM {schema}.{table}
-                ;"""
     logging.info(sql)
     cur.execute(sql)
 
@@ -76,8 +71,10 @@ def load(**context):
         sql += f"INSERT INTO {schema}.{temp_table} VALUES ('{day[0]}', '{day[1]}', '{day[2]}', '{day[3]}');"
 
     # 원래 테이블 내용 삭제
+    # DROP -> ALTER는 트랜잭션으로 불가능해서 DELETE한 다음 table에 INSERT함
     sql += f"DELETE FROM {schema}.{table};"
-    sql += f"""INSERT INTO {schema}.{table}
+    sql += f"""
+            INSERT INTO {schema}.{table} (
                 SELECT date, temp, min_temp, max_temp, create_date
                 FROM (
                     SELECT date, temp, min_temp, max_temp, create_date
@@ -85,7 +82,9 @@ def load(**context):
                     FROM {schema}.{temp_table}
                 )
                 WHERE rank = 1
-                ;"""
+            )
+            ;
+            """
     sql += "END;"
 
     logging.info(sql)
