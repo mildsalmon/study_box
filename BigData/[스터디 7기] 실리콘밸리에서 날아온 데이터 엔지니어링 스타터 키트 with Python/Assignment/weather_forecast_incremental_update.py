@@ -54,7 +54,7 @@ def load(**context):
 
     # 임시 테이블에 원래 테이블의 정보를 저장
     sql = f"DROP TABLE IF EXISTS {schema}.{temp_table};"
-    sql += f"""CREATE TABLE {schema}.{temp_table} (like {schema}.{table});"""
+    sql += f"""CREATE TABLE {schema}.{temp_table} (like {schema}.{table} INCLUDING DEFAULTS);"""
     sql += f"""
             INSERT INTO {schema}.{temp_table}
             SELECT date, temp, min_temp, max_temp, create_date
