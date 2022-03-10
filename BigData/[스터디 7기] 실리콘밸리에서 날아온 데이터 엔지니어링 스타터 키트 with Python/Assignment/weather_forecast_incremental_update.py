@@ -8,16 +8,26 @@ from datetime import timedelta
 
 import requests
 import logging
-import psycopg2
 
 
 def get_Redshift_connection():
+    """
+    Airflow Web Admin의 Connections를 통해 redshift 연결
+
     # Airflow Connections을 통해 만들어진 Redshift connection은 autocommit값이 False가 default
+    """
     hook = PostgresHook(postgres_conn_id='redshift_dev_db')
     return hook.get_conn().cursor()
 
 
-def extract(**context):
+def extract(**context) -> dict:
+    """
+    Weather forecast api를 통해 ETL처리하고자 하는 내용을 추출
+
+    :param context:
+        :keys 'params': api 접근 uri
+    :return: json 객체
+    """
     url = context['params']['url']
 
     f = requests.get(url)
@@ -26,7 +36,12 @@ def extract(**context):
     return f_json
 
 
-def transform(**context):
+def transform(**context) -> list:
+    """
+    api를 통해 얻은 내용 중에서 원하는 내용(date, day temp, max temp, min temp)만 읽어서 원하는 포멧으로 변환
+
+    :return: 앞으로 7일간의 온도 정보
+    """
     days = context['task_instance'].xcom_pull(key='return_value', task_ids='extract')['daily']
 
     extract_days = []
@@ -45,6 +60,23 @@ def transform(**context):
 
 
 def load(**context):
+    """
+    1. weather_forecast table과 동일한 속성, default 값을 갖는 임시 테이블(temp_weather_forecast)을 생성.
+    2. weather_forecast table의 ROWS를 temp_weather_forecast table에 복사 (CTAS)
+    --- 트랜잭션 BEGIN
+    3. temp_weather_forecast table에 api를 통해 새로 수집한 정보를 INSERT
+    4. weather_forecast table의 ROWS를 전부 삭제
+    5. temp_weather_forecast table에서 date 컬럼을 기준으로 PK를 보장하는 방법으로 weather_forecast table에 INSERT (CTAS)
+        1) date 컬럼을 기준으로 PARTITION BY를 실행하고 create_date 컬럼을 기준으로 내림차순 정렬하여 첫번째 값만 선택하여 PK를 보장한다.
+    --- 트랜잭션 END
+
+    :param context:
+        :keys 'params':
+            :keys 'schema': redshift의 schema 이름
+            :keys 'table': redshift의 table 이름
+            :keys 'temp_table': incremental update에 사용될 임시 table
+    :return:
+    """
     schema = context['params']['schema']
     table = context['params']['table']
     temp_table = context['params']['temp_table']
@@ -106,6 +138,7 @@ weather_forecast_incremental_update = DAG(
 
 
 # tasks
+# 위도 / 경도
 lat = 37.5642135
 lon = 127.0016985
 

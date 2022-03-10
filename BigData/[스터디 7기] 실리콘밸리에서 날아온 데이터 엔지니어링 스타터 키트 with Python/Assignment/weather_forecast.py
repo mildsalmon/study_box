@@ -8,15 +8,24 @@ from datetime import timedelta
 
 import requests
 import logging
-import psycopg2
 
 
 def get_Redshift_connection():
+    """
+    Airflow Web Admin의 Connections를 통해 redshift 연결
+    """
     hook = PostgresHook(postgres_conn_id='redshift_dev_db')
     return hook.get_conn().cursor()
 
 
-def extract(**context):
+def extract(**context) -> dict:
+    """
+    Weather forecast api를 통해 ETL처리하고자 하는 내용을 추출
+
+    :param context:
+        :keys 'params': api 접근 uri
+    :return: json 객체
+    """
     url = context['params']['url']
 
     f = requests.get(url)
@@ -25,7 +34,12 @@ def extract(**context):
     return f_json
 
 
-def transform(**context):
+def transform(**context) -> list:
+    """
+    api를 통해 얻은 내용 중에서 원하는 내용(date, day temp, max temp, min temp)만 읽어서 원하는 포멧으로 변환
+
+    :return: 앞으로 7일간의 온도 정보
+    """
     days = context['task_instance'].xcom_pull(key='return_value', task_ids='extract')['daily']
 
     extract_days = []
@@ -44,6 +58,15 @@ def transform(**context):
 
 
 def load(**context):
+    """
+    Full refresh 방식으로 데이터를 red shift에 적재.
+
+    :param context:
+        :keys 'params':
+            :keys 'schema': redshift의 schema 이름
+            :keys 'table': redshift의 table 이름
+    :return:
+    """
     schema = context['params']['schema']
     table = context['params']['table']
     days = context['task_instance'].xcom_pull(key='return_value', task_ids='transform')
@@ -76,6 +99,7 @@ weather_forecast = DAG(
 
 
 # tasks
+# 위도 / 경도
 lat = 37.5642135
 lon = 127.0016985
 
