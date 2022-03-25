@@ -101,7 +101,7 @@ test_dag = DAG(
 
 # 2. Redshift Bulk Update : COPY (MySQL -> S3 -> Redshift)
 
-### a. COPY 명령
+## A. COPY 명령
 
 > COPY 명령은 중복제거, full refresh 신경쓰지 않고, S3 위치에 있는 파일을 Redshift에 loading하는 것만 함.
 
@@ -124,7 +124,7 @@ csv;
 - csv
 	- S3에 있는 파일의 포멧 지정
 
-### b. Full Refresh
+## B. Full Refresh
 
 > MySQL에 있는 테이블 nps를 Redshift 내의 스키마 밑의 nps 테이블로 복사
 > > S3를 경유해서 COPY 명령으로 Redshift에 복사
@@ -137,7 +137,7 @@ csv;
 > Airflow에서 기본으로 제공되는 S3 관련된 기능들이 그렇게 좋지 않음
 > 그래서 많은 경우 python에서 AWS를 조작하는데 사용되는 **boto3 library**를 사용하여 직접 구현함.
 
-### c. Incremental Update
+## C. Incremental Update
 
 > Incremental Update가 가능하고, Backfill을 하는데 사용할 수 있다.
 
