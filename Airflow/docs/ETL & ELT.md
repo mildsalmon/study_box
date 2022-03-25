@@ -1,3 +1,28 @@
+# Table of Contents
+
+- [1. ETL (Extract, Transform, Load) = 데이터 파이프라인, DAG,](#1-etl-extract-transform-load--데이터-파이프라인-dag)
+    - [A. 데이터 파이프라인](#a-데이터-파이프라인)
+        - [a. 협의의 데이터 파이프라인](#a-협의의-데이터-파이프라인)
+        - [b. 광의의 데이터 파이프라인](#b-광의의-데이터-파이프라인)
+        - [c. 데이터 파이프라인을 만들 때 고려할 점](#c-데이터-파이프라인을-만들-때-고려할-점)
+            - [ㄱ) Best Practices](#ㄱ-best-practices)
+                - [1) 데이터를 읽어올 때](#1-데이터를-읽어올-때)
+                    - [가) Incremental Update를 해야하는 경우](#가-incremental-update를-해야하는-경우)
+                    - [나) Incremental Update를 피해야하는 이유](#나-incremental-update를-피해야하는-이유)
+                    - [다) Incremental Update가 가능한 경우](#다-incremental-update가-가능한-경우)
+                    - [라) Incremental Update가 불가능한 경우](#라-incremental-update가-불가능한-경우)
+                - [2) 멱등성(Idempotency)](#2-멱등성idempotency)
+                - [3) [[backfill]]](#3-backfill)
+                - [4) 문서화](#4-문서화)
+                - [5) 데이터 파이프라인 사고시 사고 리포트 작성](#5-데이터-파이프라인-사고시-사고-리포트-작성)
+    - [B. 간단한 ETL](#b-간단한-etl)
+        - [a. Extract](#a-extract)
+        - [b. Transform](#b-transform)
+        - [c. Load](#c-load)
+- [2. ELT](#2-elt)
+
+---
+
 # 1. ETL (Extract, Transform, Load) = 데이터 파이프라인, DAG,  
 
 > Data Source에서 Data를 Extract(읽어서, 추출해서)하고 우리가 원하는 format으로 Transform(변환)한 다음에 Data Warehouse에 Load(적재)하는 것
@@ -84,7 +109,7 @@
 
 - 동일한 입력이 있는 경우(입력 source가 바뀌지 않았을 떄), 데이터 파이프라인을 몇 번 돌리던 DW에 있는 데이터는 동일해야한다.
 
-##### 3) [[backfill]]
+##### 3) [backfill](http://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/backfill.md)
 
 ##### 4) 문서화
 

@@ -2,7 +2,7 @@
 
 > Airflow 안에서 job들이 ETL 또는 ELT 형태로 동작한다.
 
-[[ETL & ELT]]
+[ETL & ELT](http://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/ETL%20%26%20ELT.md)
 
 # 2. Airflow 소개
 
@@ -27,9 +27,9 @@
 		- default 내부 DB로 SQLite를 사용함
 			- SQLite는 싱글 스레드 데이터베이스이자 파일 기반 데이터베이스라 production 또는 개발 용도로 사용하지 못함
 
-## B. [[DAG]](directed acyclic graph)
+## B. [DAG](http://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/DAG.md)(directed acyclic graph)
 
-## C. [[Operator]]
+## C. [Operator](http://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md)
 
 ## C. 컴포넌트
 
@@ -89,7 +89,7 @@ DAG가 증가하면 server의 사양을 올린다.
 
 - Airflow 프레임워크가 데이터 파이프라인을 만드는데 최적화된 것이기 떄문에 다양한 형태로 실행 순서를 정의할 수 있다.
 - 다양한 operator들을 통해 개발이 쉽다.
-- [[backfill]]을 쉽게 할 수 있다.
+- [backfill](http://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/backfill.md)을 쉽게 할 수 있다.
 
 ### b. Airflow의 단점
 
@@ -179,7 +179,7 @@ def transform(**context):
 
 [https://cloud.google.com/composer/docs/concepts/versioning/composer-versions](https://cloud.google.com/composer/docs/concepts/versioning/composer-versions) 참고
 
-## I. [[airflow.cfg]]
+## I. [airflow.cfg](http://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/airflow.cfg.md)
 
 # 3. sql
 

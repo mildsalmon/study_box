@@ -1,3 +1,22 @@
+# Table of Contents
+
+- [1. DAG(directed acyclic graph)](#1-dagdirected-acyclic-graph)
+    - [A. DAG Common Configuration](#a-dag-common-configuration)
+    - [B. DAG Object Creation](#b-dag-object-creation)
+- [2. Redshift Bulk Update : COPY (MySQL -> S3 -> Redshift)](#2-redshift-bulk-update--copy-mysql---s3---redshift)
+    - [A. COPY 명령](#a-copy-명령)
+    - [B. Full Refresh](#b-full-refresh)
+    - [C. Incremental Update](#c-incremental-update)
+- [3. summary table 구현](#3-summary-table-구현)
+    - [A. 간단한 Summary Table DAG 구현](#a-간단한-summary-table-dag-구현)
+        - [a. 테스트 방법](#a-테스트-방법)
+        - [b. DAG안에 params로 query 입력](#b-dag안에-params로-query-입력)
+        - [c. config 파일로 만들기](#c-config-파일로-만들기)
+            - [ㄱ) config 파일](#ㄱ-config-파일)
+            - [ㄴ) dag](#ㄴ-dag)
+
+---
+
 # 1. DAG(directed acyclic graph)
 
 > 위상 정렬
@@ -101,7 +120,7 @@ test_dag = DAG(
 
 # 2. Redshift Bulk Update : COPY (MySQL -> S3 -> Redshift)
 
-### a. COPY 명령
+## A. COPY 명령
 
 > COPY 명령은 중복제거, full refresh 신경쓰지 않고, S3 위치에 있는 파일을 Redshift에 loading하는 것만 함.
 
@@ -124,20 +143,20 @@ csv;
 - csv
 	- S3에 있는 파일의 포멧 지정
 
-### b. Full Refresh
+## B. Full Refresh
 
 > MySQL에 있는 테이블 nps를 Redshift 내의 스키마 밑의 nps 테이블로 복사
 > > S3를 경유해서 COPY 명령으로 Redshift에 복사
 
 - 3개의 Operator를 사용해서 구현
-	- [[Operator#b S3DeleteObjectsOperator]]
-	- [[Operator#c MySQLToS3Operator]]
-	- [[Operator#d S3ToRedshiftOperator]]
+	- [Operator#b S3DeleteObjectsOperator](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md#b-s3deleteobjectsoperator)
+	- [Operator#c MySQLToS3Operator](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md#%E3%84%B1-full-refresh)
+	- [Operator#d S3ToRedshiftOperator](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md#%E3%84%B1-full-refresh-1)
 
 > Airflow에서 기본으로 제공되는 S3 관련된 기능들이 그렇게 좋지 않음
 > 그래서 많은 경우 python에서 AWS를 조작하는데 사용되는 **boto3 library**를 사용하여 직접 구현함.
 
-### c. Incremental Update
+## C. Incremental Update
 
 > Incremental Update가 가능하고, Backfill을 하는데 사용할 수 있다.
 
@@ -151,10 +170,10 @@ csv;
 ---
 
 - 3개의 Operator를 사용해서 구현
-	- [[Operator#b S3DeleteObjectsOperator]]
-	- [[Operator#ㄴ Incremental Update]]
+	- [Operator#b S3DeleteObjectsOperator](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md#b-s3deleteobjectsoperator)
+	- [Operator#ㄴ Incremental Update](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md#%E3%84%B4-incremental-update)
 		- execution_date에 해당하는 레코드만 읽어오게 바뀜
-	- 자체 구현한 [[Operator#ㄴ Incremental Update를 위해 자체 구현]]
+	- 자체 구현한 [Operator#ㄴ Incremental Update를 위해 자체 구현](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/docs/Operator.md#%E3%84%B4-incremental-update%EB%A5%BC-%EC%9C%84%ED%95%B4-%EC%9E%90%EC%B2%B4-%EA%B5%AC%ED%98%84)
 		- plugins 폴더
 
 # 3. summary table 구현
