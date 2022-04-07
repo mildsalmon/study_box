@@ -14,6 +14,10 @@
 
 # 6. [[정규화]]
 
+# 7. [[관계데이터 연산]]
+
+# 8. [[데이터베이스 언어 SQL]]
+
 # 참고자료
 
 [1] 백현미, [데이터베이스의 원리와 응용 - 한양대학교 | KOCW 공개 강의](http://www.kocw.net/home/search/kemView.do?kemId=1163794). (accessed Mar 28, 2022)
