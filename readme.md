@@ -9,6 +9,7 @@
 ### Data Engineering
 
 - 📊 [Airflow](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/readme.md)
+- 🐍 [Python](https://github.com/mildsalmon/Study/tree/master/Python)
 
 ---
 
