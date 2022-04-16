@@ -1,12 +1,14 @@
 # 🚗 정리한 내용으로 바로가기 !
 
-### 🔮 [운영체제](https://github.com/mildsalmon/Study/blob/master/Operating%20Systems/readme.md)
+### CS
 
-### ⚡ [네트워크](https://github.com/mildsalmon/Study/blob/master/Network/readme.md)
+- 🔮 [운영체제](https://github.com/mildsalmon/Study/blob/master/Operating%20Systems/readme.md)
 
-### 🚥 [[스터디 7기] 실리콘밸리에서 날아온 데이터 엔지니어링 스타터 키트 with Python](https://github.com/mildsalmon/Study/blob/master/BigData/%5B%EC%8A%A4%ED%84%B0%EB%94%94%207%EA%B8%B0%5D%20%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC%EC%97%90%EC%84%9C%20%EB%82%A0%EC%95%84%EC%98%A8%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EC%8A%A4%ED%83%80%ED%84%B0%20%ED%82%A4%ED%8A%B8%20with%20Python/readme.md)
+- ⚡ [네트워크](https://github.com/mildsalmon/Study/blob/master/Network/readme.md)
 
-### 📊 [Airflow](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/readme.md)
+### Data Engineering
+
+- 📊 [Airflow](https://github.com/mildsalmon/Study/blob/Airflow/Airflow/readme.md)
 
 ---
 
