@@ -7,4 +7,4 @@ Interview
 !/BigData/Technology_that_supports_big_data/twitter/adhoc/metastore_db/
 !/BigData/Technology_that_supports_big_data/twitter/adhoc/spark-warehouse/
 1.py
-*/.idea/*
+.idea/*
