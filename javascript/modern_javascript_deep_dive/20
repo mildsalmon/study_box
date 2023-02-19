@@ -1,0 +1,132 @@
+# 1. strict mode
+
+## A. strict mode란?
+
+자바스크립트 언어의 문법을 좀 더 엄격히 적용하여 오류를 발생시킬 가능성이 높거나 자바스크립트 엔진의 최적화 작업에 문제를 일으킬 수 있는 코드에 대해 명시적인 에러를 발생시킨다. (ESLint가 더 좋음)
+
+ES6에서 도입된 클래스와 모듈은 기본적으로 strict mode가 적용된다.
+
+## B. strict mode의 적용
+
+### a. 스크립트 전체에 strict mode 적용하기 (전역의 선두에 추가)
+
+```javascript
+'use strict';
+
+function foo(){
+  x = 10; // ReferenceError
+}
+```
+
+전역에 적용한 strict mode는 스크립트 단위로 적용된다.
+
+strict mode 스크립트와 non-strict mode 스크립트를 혼용하는 것은 오류를 발생시킬 수 있다. 외부 서드파티 라이브러리가 non-strict mode인 경우도 있다. 실행 함수로 스크립트 전체를 감싸서 스코프를 구분하고 즉시 실행함수의 선두에 strict mode를 적용한다.
+
+### b. 해당 함수와 중첩 함수에 strict mode 적용 (함수 몸체의 선두)
+
+```javascript
+function foo(){
+  'use strict';
+  
+  x = 10; // ReferenceError
+}
+foo();
+```
+
+모든 함수에 일일이 strict mode를 적용하는 것은 번거롭다.
+
+strict mode는 즉시 실행 함수로 감싼 스크립트 단위로 적용하는 것이 바람직하다.
+
+## C. strict mode가 발생시키는 에러
+
+### a. 암묵적 전역
+
+```javascript
+(function () {
+  'use strict';
+  
+  x = 1;
+  console.log(x); // ReferenceError
+}());
+```
+
+### b. 변수, 함수, 매개변수의 삭제
+
+```javascript
+(function () {
+  'use strict';
+  
+  var x = 1;
+  delete x; // sytaxError
+  
+  function foo(a){
+    delete a; // syntaxError
+  }
+  delete foo; // syntaxError
+}());
+```
+
+### c. 매개변수 이름의 중복
+
+```javascript
+(function () {
+  'use strict';
+  
+  //syntaxError
+  function foo(x, x){
+    return x + x;
+  }
+  console.log(foo(1, 2));
+}());
+```
+
+### d. with문의 사용
+
+with문은 동일한 객체의 프로퍼티를 반복해서 사용할 때 객체 이름을 생략할 수 있는 장점이 있지만 성능과 가독성이 나빠지는 문제가 있다.
+
+```javascript
+(function () {
+  'use strict';
+  
+  // SyntaxError
+  with({ x: 1 }){
+    console.log(x);
+  }
+}());
+```
+
+## D. strict mode 적용에 의한 변화
+
+### a. 일반 함수의 this
+
+함수를 일반 함수로서 호출하면 this에 undefined가 바인딩된다.
+
+```javascript
+(function () {
+  'use strict';
+  
+  function foo() {
+    console.log(this); // undefined -> window
+  }
+  foo();
+  
+  function Foo() {
+    console.log(this);
+  }
+  new Foo();
+}());
+```
+
+### b. arguments 객체
+
+```javascript
+(function (a) {
+  'use strict';
+  a = 2;
+  
+  console.log(arguments); // { 0:1, length: 1} // a = 2
+}(1));
+```
+
+
+
